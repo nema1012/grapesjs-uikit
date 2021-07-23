@@ -1,0 +1,28 @@
+{
+  "name": "grapesjs-uikit",
+  "version": "1.0.1",
+  "description": "grapesjs-uikit",
+  "main": "dist/grapesjs-uikit.min.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nema1012/grapesjs-uikit.git"
+  },
+  "scripts": {
+    "start": "grapesjs-cli serve",
+    "build": "grapesjs-cli build",
+    "bump": "npm version patch -m 'Bump v%s'"
+  },
+  "keywords": [
+    "grapesjs",
+    "plugin"
+  ],
+  "devDependencies": {
+    "grapesjs-cli": "^1.0.15"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "grapesjs": "^0.17.19",
+    "postcss": "^8.3.5",
+    "uikit": "git+https://github.com/nema1012/uikit.git"
+  }
+}
