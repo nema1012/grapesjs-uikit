@@ -81,7 +81,7 @@ export default (domc, editor) => {
                     accordion = '';
                 }
                 if (accordion.includes(attribut)) {
-                    accordion = accordion.replace(new RegExp(`${attribut}: (-|)[a-z|0-9]*`, 'g'), `${attribut}: ${state}`);
+                    accordion = accordion.replace(new RegExp(` ${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
                 } else if (state) {
                     accordion += `${attribut}: ${state};`;
                 }

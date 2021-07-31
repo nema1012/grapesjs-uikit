@@ -1,10 +1,11 @@
 import Card, {CardBlock, CardBlockHorizonzal} from './components/Card';
 import Navigation, {TabBlock} from './components/Navigation'
-import ImageComponents, {Image, BackgroundImage, ImageSlider, UcCover, ResponsiveHeight, ParallaxHeadline } from './components/Image'
+import ImageComponents, {Image, BackgroundImage, ImageSlider, UcCover, ResponsiveHeight} from './components/Image'
 
 import Default, {Article, Column, ColumnDivider, ColumnDividerWithSpan, Container} from './components/Default';
 import AccordionElements, {Accordion} from './components/Accordion';
 import {Section} from './components/Section';
+import ParallaxElements, {Parallax, ParallaxHeadline, ParallaxTarget, ParallaxMulti, ParallaxViewport, ParallaxNesting} from './components/Parallax';
 
 export default (editor, opts = {}) => {
   const c = opts;
@@ -26,7 +27,6 @@ export default (editor, opts = {}) => {
   ImageSlider(bm, c);
   UcCover(bm, c);
   ResponsiveHeight(bm, c);
-  ParallaxHeadline(bm, c);
   AccordionElements(domc, editor);
   Accordion(bm, c);
   Article(bm, c);
@@ -35,4 +35,11 @@ export default (editor, opts = {}) => {
   ColumnDividerWithSpan(bm, c);
   Container(bm, c);
   Section(bm, c);
+  Parallax(bm, c);
+  ParallaxHeadline(bm, c);
+  ParallaxTarget(bm, c);
+  ParallaxMulti(bm, c);
+  ParallaxNesting(bm, c);
+  ParallaxViewport(bm, c);
+  ParallaxElements(domc, editor);
 };

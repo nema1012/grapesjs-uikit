@@ -173,5 +173,4 @@ export default grapesjs.plugins.add('grapesjs-uikit', (editor, opts = {}) => {
   // Add blocks
   loadBlocks(editor, options);
   loadCss(editor, options);
-
 });

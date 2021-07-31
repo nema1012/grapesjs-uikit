@@ -77,19 +77,6 @@ export const ResponsiveHeight = (bm, c) => {
   });
 }
 
-export const ParallaxHeadline = (bm, c) => {
-  bm.add('ParallaxHeadline', {
-    attributes: {
-      class: 'fa fa-image'
-    },
-    label: 'Parallax Headline',
-    category: 'Media',
-    content: `<div class="uk-height-large uk-background-cover uk-light uk-flex uk-parallax">
-    <h1 class="uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical">Headline</h1>
-      </div>`
-  });
-}
-
 export default (domc, editor) => {
   const comps = editor.DomComponents;
   const defaultType = comps.getType('default');
@@ -317,7 +304,7 @@ export default (domc, editor) => {
           slideShow = '';
         }
         if (slideShow.includes(attribut)) {
-          slideShow = slideShow.replace(new RegExp(`${attribut}: (-|)[a-z|0-9]*`, 'g'), `${attribut}: ${state}`);
+          slideShow = slideShow.replace(new RegExp(` ${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
         } else if (state) {
           slideShow += `${attribut}: ${state};`;
         }
@@ -436,78 +423,6 @@ export default (domc, editor) => {
           }
         }
       }),
-    view: defaultView
-  });
-
-  domc.addType('uk-parallax', {
-    model: defaultModel.extend({
-      defaults: Object.assign({}, defaultModel.prototype.defaults, {
-        'name': 'Parallax',
-        tagName: 'div',
-        fallback: null,
-        traits: [
-          {
-            type: 'href',
-            label: 'Image Url',
-            name: 'image',
-            changeProp: 1
-          },
-          {
-            type: 'number',
-            label: 'Animate background X position',
-            name: 'bgx',
-            changeProp: 1
-          },
-          {
-            type: 'number',
-            label: 'Animate background Y position',
-            name: 'bgy',
-            changeProp: 1
-          }
-        ].concat(defaultModel.prototype.defaults.traits)
-      }),
-      init2() {
-        this.listenTo(this, 'change:image', this.updateImage);
-        this.listenTo(this, 'change:bgy', this.updateBgy);
-        this.listenTo(this, 'change:bgx', this.updateBgx);
-        this.set('image', img_src_default);
-        this.set('bgy', -200);
-      },
-      updateBgx() { this.updateBg('bgx') },
-      updateBgy() { this.updateBg('bgy') },
-      updateBg(attribut) {
-        const state = this.get(attribut);
-        let parallax = this.getAttributes()['uk-parallax'];
-
-        if (!parallax) {
-          parallax = '';
-        }
-        if (parallax.includes(attribut)) {
-          parallax = parallax.replace(new RegExp(`${attribut}: (-|)[a-z|0-9]*`, 'g'), `${attribut}: ${state}`);
-        } else {
-          parallax += `${attribut}: ${state};`;
-        }
-        let attrs = [];
-        attrs['uk-parallax'] = parallax;
-        this.addAttributes(attrs);
-
-        UIkit.update(document.body, 'update');
-      },
-      updateImage() {
-        const state = this.get('image');
-        let attrs = [];
-        attrs['style'] = `background-image: url(${state});`;
-        this.addAttributes(attrs);
-
-        UIkit.update(document.body, 'update');
-      }
-    }, {
-      isComponent: function (el) {
-        if (el && el.classList && el.classList.contains('uk-parallax')) {
-          return { type: 'uk-parallax' };
-        }
-      }
-    }),
     view: defaultView
   });
 }
