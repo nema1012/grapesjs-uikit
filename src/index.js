@@ -166,8 +166,6 @@ export default grapesjs.plugins.add('grapesjs-uikit', (editor, opts = {}) => {
     }, ...opts
   };
 
-  editor.BlockManager.get('column1').set('Parallax', 'Parallax')
-
   // Add components
   loadCommands(editor, options);
   loadTraits(editor, options);
