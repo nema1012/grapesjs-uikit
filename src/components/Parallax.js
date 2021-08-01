@@ -86,8 +86,11 @@ export default (domc, editor) => {
   const comps = editor.DomComponents;
   const defaultType = comps.getType('default');
   const defaultModel = defaultType.model;
-
   const defaultView = defaultType.view;
+
+  const textType = comps.getType('text');
+  const textModel = textType.model;
+  const textView = textType.view;
 
   domc.addType('uk-parallax', {
     model: defaultModel.extend({
@@ -194,12 +197,126 @@ export default (domc, editor) => {
       }
     }, {
       isComponent(el) {
-        if (el.hasAttribute && el.hasAttribute('uk-parallax')) {
+        if (el.hasAttribute && el.hasAttribute('uk-parallax') && el.tagName === 'DIV') {
           return { type: 'uk-parallax' };
         }
       },
     }),
 
     view: defaultView,
+  });
+
+  domc.addType('uk-parallax-text', {
+    model: textModel.extend({
+      defaults: Object.assign({}, textModel.prototype.defaults, {
+        name: 'Parallax',
+        traits: [
+          {
+            type: 'text',
+            label: 'target',
+            name: 'target',
+            changeProp: 1
+          },
+          {
+            label: 'opacity',
+            name: 'opacity',
+            changeProp: 1,
+            type: 'text',
+          },
+          {
+            type: 'text',
+            label: 'Animate translateX',
+            name: 'x',
+            changeProp: 1
+          },
+          {
+            type: 'text',
+            label: 'Animate translatey',
+            name: 'y',
+            changeProp: 1
+          },
+          {
+            type: 'text',
+            label: 'Animate background X position.',
+            name: 'bgx',
+            changeProp: 1
+          },
+          {
+            type: 'text',
+            label: 'Animate background Y position.',
+            name: 'bgy',
+            changeProp: 1
+          },
+          {
+            type: 'text',
+            label: 'Scale',
+            name: 'scale',
+            changeProp: 1
+          },
+          {
+            type: 'number',
+            label: 'Viewport',
+            name: 'viewport',
+            changeProp: 1,
+            placeholder: '0-1',
+            min: 0, // Minimum number value
+            max: 1, // Maximum number value
+            step: 0.1,
+          },
+        ].concat(textModel.prototype.defaults.traits)
+      }),
+      init2() {
+        this.listenTo(this, 'change:opacity', this.opacity);
+        this.listenTo(this, 'change:x', this.x);
+        this.listenTo(this, 'change:y', this.y);
+        this.listenTo(this, 'change:bgx', this.bgx);
+        this.listenTo(this, 'change:bgy', this.bgy);
+        this.listenTo(this, 'change:scale', this.scale);
+        this.listenTo(this, 'change:viewport', this.viewport);
+
+        const attributes = this.getAttributes()['uk-parallax']
+        if (attributes) {
+          const attrs = attributes.split(';');
+
+          for (let idx in attrs) {
+            const attribute = attrs[idx].split(':');
+            if (attribute.length > 1) {
+              this.set(attribute[0].replace(/\s/g, ''), attribute[1].replace(/\s/g, ''));
+            }
+          }
+        };
+      },
+      opacity() { this.updateParallax('opacity') },
+      x() { this.updateParallax('x') },
+      y() { this.updateParallax('y') },
+      scale() { this.updateParallax('scale') },
+      viewport() { this.updateParallax('viewport') },
+      updateParallax(attribut) {
+        const state = this.get(attribut);
+
+        let parallax = this.getAttributes()['uk-parallax'];
+
+        if (!parallax) {
+          parallax = '';
+        }
+        if (parallax.includes(` ${attribut}: `)) {
+          parallax = parallax.replace(new RegExp(` ${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
+        } else if (state) {
+          parallax += ` ${attribut}: ${state};`;
+        }
+        let attrs = [];
+        attrs['uk-parallax'] = parallax
+        this.addAttributes(attrs);
+        UIkit.update(document.body, 'update');
+      }
+    }, {
+      isComponent(el) {
+        if (el.hasAttribute && el.hasAttribute('uk-parallax') && el.tagName !== 'DIV') {
+          return { type: 'uk-parallax-text' };
+        }
+      },
+    }),
+
+    view: textView,
   });
 }
