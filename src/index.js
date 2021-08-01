@@ -12,6 +12,10 @@ const loadCss = editor => {
   .center img {
     display: initial;
   }
+
+  .mock-img {
+    background-image: url('https://via.placeholder.com/1200x800/0000FF/808080');
+  }
   `
 };
 

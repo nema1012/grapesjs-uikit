@@ -20,7 +20,7 @@ export const ParallaxTarget = (bm, c) => {
     },
     label: 'Parallax with Target',
     category: 'Parallax',
-    content: `<div id="test-target" class="uk-height-large uk-background-cover uk-light uk-flex" uk-parallax="bgy: -200" style="background-image: url('https://via.placeholder.com/1200x800/0000FF/808080');">
+    content: `<div id="test-target" class="uk-height-large uk-background-cover uk-light uk-flex mock-img" uk-parallax="bgy: -200">
     <h1 class="uk-width-1-2-at-m uk-text-center uk-margin-auto uk-margin-auto-vertical" uk-parallax="target: #test-target; y: 100,0">Headline</h1>
       </div>`
   });
@@ -33,7 +33,7 @@ export const ParallaxHeadline = (bm, c) => {
     },
     label: 'Parallax Headline',
     category: 'Parallax',
-    content: `<div class="uk-height-large uk-background-cover uk-light uk-flex" uk-parallax="bgy: -200" style="background-image: url('https://via.placeholder.com/1200x800/0000FF/808080');">
+    content: `<div class="uk-height-large uk-background-cover uk-light uk-flex mock-img" uk-parallax="bgy: -200">
     <h1 class="uk-width-1-2-at-m uk-text-center uk-margin-auto uk-margin-auto-vertical">Headline</h1>
 </div>`
   });
@@ -46,7 +46,7 @@ export const ParallaxMulti = (bm, c) => {
     },
     label: 'Parallax Multi',
     category: 'Parallax',
-    content: `<div class="uk-height-large uk-background-cover uk-overflow-hidden uk-light uk-flex uk-flex-top" style="background-image: url('https://via.placeholder.com/1200x800/0000FF/808080');">
+    content: `<div class="uk-height-large uk-background-cover uk-overflow-hidden uk-light uk-flex uk-flex-top mock-img">
     <div class="uk-width-1-2-at-m uk-text-center uk-margin-auto uk-margin-auto-vertical">
         <h1 uk-parallax="opacity: 0,1,1; y: -100,0,0; x: 100,100,0; scale: 2,1,1; viewport: 0.5;">Headline</h1>
         <p uk-parallax="opacity: 0,1,1; y: 100,0,0; x: -100,-100,0; scale: 0.5,1,1; viewport: 0.5;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -62,7 +62,7 @@ export const ParallaxViewport = (bm, c) => {
     },
     label: 'Parallax Viewport',
     category: 'Parallax',
-    content: `<div class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" style="background-image: url('https://via.placeholder.com/1200x800/0000FF/808080');">
+    content: `<div class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top mock-img">
     <h1 class="uk-width-1-2-at-m uk-text-center uk-margin-auto uk-margin-auto-vertical" uk-parallax="opacity: 0,1; y: 100,0; viewport: 0.5">Headline</h1>
 </div>`
   });
@@ -75,7 +75,7 @@ export const ParallaxNesting = (bm, c) => {
     },
     label: 'Parallax Nesting',
     category: 'Parallax',
-    content: `<div class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top" uk-parallax="bgy: -200" style="background-image: url('https://via.placeholder.com/1200x800/0000FF/808080');">
+    content: `<div class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top mock-img" uk-parallax="bgy: -200">
     <h1 class="uk-width-1-2-at-m uk-text-center uk-margin-auto uk-margin-auto-vertical" uk-parallax="y: 100,0">Headline</h1>
 </div>`
   });
