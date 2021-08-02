@@ -69,6 +69,18 @@ export default (domc) => {
                         label: 'Hover Shadow'
                     },
                     {
+                        type: 'class_select',
+                        options: [
+                            { value: '', name: 'None' },
+                            { value: 'uk-container-xsmall', name: 'xsmall' },
+                            { value: 'uk-container-small', name: 'small' },
+                            { value: 'uk-container-large', name: 'Large' },
+                            { value: 'uk-container-xlarge', name: 'XLarge' },
+                            { value: 'uk-container-expand', name: 'Expand' }
+                        ],
+                        label: 'Container size'
+                    },
+                    {
                         type: 'text',
                         label: 'ID',
                         name: 'id',
@@ -189,6 +201,18 @@ export default (domc) => {
                     {
                         type: 'class_select',
                         options: [
+                            { value: '', name: 'None' },
+                            { value: 'uk-container-xsmall', name: 'xsmall' },
+                            { value: 'uk-container-small', name: 'small' },
+                            { value: 'uk-container-large', name: 'Large' },
+                            { value: 'uk-container-xlarge', name: 'XLarge' },
+                            { value: 'uk-container-expand', name: 'Expand' }
+                        ],
+                        label: 'Container size'
+                    },
+                    {
+                        type: 'class_select',
+                        options: [
                             { value: '', name: 'Default' },
                             ...contexts_w_white.map(function (v) { return { value: 'border border-' + v, name: capitalize(v) } })
                         ],
@@ -243,18 +267,6 @@ export default (domc) => {
                 name: 'Container',
                 classes: ['uk-container'],
                 traits: [
-                    {
-                        type: 'class_select',
-                        options: [
-                            { value: '', name: 'None' },
-                            { value: 'uk-container-xsmall', name: 'xsmall' },
-                            { value: 'uk-container-small', name: 'small' },
-                            { value: 'uk-container-large', name: 'Large' },
-                            { value: 'uk-container-xlarge', name: 'XLarge' },
-                            { value: 'uk-container-expand', name: 'Expand' }
-                        ],
-                        label: 'Container size'
-                    }
                 ].concat(defaultModel.prototype.defaults.traits)
             }),
             init2() {
@@ -275,7 +287,7 @@ export const Container = (bm, c) => {
     bm.add('container', {
         label: 'Container',
         category: 'Components',
-        content: '<div data-gjs-type="uk-container">Container</div>'
+        content: '<div data-gjs-type="uk-container"><p>Container</p></div>'
     });
 };
 

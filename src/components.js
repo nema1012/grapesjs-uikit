@@ -7,6 +7,9 @@ import AccordionElements, {Accordion} from './components/Accordion';
 import {Section} from './components/Section';
 import ParallaxElements, {Parallax, ParallaxHeadline, ParallaxTarget, ParallaxMulti, ParallaxViewport, ParallaxNesting} from './components/Parallax';
 
+let defaultBlocks = [
+]
+
 export default (editor, opts = {}) => {
   const c = opts;
   const domc = editor.DomComponents;
@@ -42,4 +45,9 @@ export default (editor, opts = {}) => {
   ParallaxNesting(bm, c);
   ParallaxViewport(bm, c);
   ParallaxElements(domc, editor);
+
+  defaultBlocks.forEach(element => {
+    editor.BlockManager.add(element.id, element);
+  });
 };
+
