@@ -32,7 +32,7 @@ export const ImageSlider = (bm, c) => {
     },
     label: 'Image Slider',
     category: 'Media',
-    content: `<div uk-slideshow="animation: push;" class="uk-slideshow">
+    content: `<div uk-slideshow class="uk-slideshow">
     <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow-container>
   <ul class="uk-slideshow-items">
       <li data-gjs-type="image-container">
@@ -255,7 +255,7 @@ export default (domc, editor) => {
             label: 'Animaton',
             name: 'animation',
             options: [
-              { value: '', name: 'Slide' },
+              { value: 'slide', name: 'Slide' },
               { value: 'fade', name: 'Fade' },
               { value: 'scale', name: 'Scale' },
               { value: 'pull', name: 'Pull' },
@@ -291,7 +291,7 @@ export default (domc, editor) => {
         this.listenTo(this, 'change:autoplay', this.updateAutoplay);
         this.listenTo(this, 'change:dotnav', this.updateDotnav);
         this.listenTo(this, 'change:navigation', this.updateNavigation);
-        this.set('animation', '');
+        this.set('animation', 'slide');
         this.set('navigation', true);
       },
       updateAnimation() { this.updateSlideShow('animation') },
@@ -304,9 +304,9 @@ export default (domc, editor) => {
           slideShow = '';
         }
         if (slideShow.includes(attribut)) {
-          slideShow = slideShow.replace(new RegExp(` ${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
+          slideShow = slideShow.replace(new RegExp(`(\s|)${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
         } else if (state) {
-          slideShow += `${attribut}: ${state};`;
+          slideShow += ` ${attribut}: ${state};`;
         }
 
         let attrs = [];

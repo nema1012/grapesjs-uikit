@@ -20,8 +20,8 @@ export const ParallaxTarget = (bm, c) => {
     },
     label: 'Parallax with Target',
     category: 'Parallax',
-    content: `<div id="test-target" class="uk-height-large uk-background-cover uk-light uk-flex mock-img" uk-parallax="bgy: -200">
-    <div uk-parallax="target: #test-target; y: 100,0"><h1 class="uk-width-1-2-at-m uk-text-center uk-margin-auto uk-margin-auto-vertical">Headline</h1></div>
+    content: `<div id="test-target" class="uk-height-large uk-background-cover uk-light uk-flex mock-img" uk-parallax="bgy: -200;">
+    <div uk-parallax="target: #test-target; y: 100,0;"><h1 class="uk-width-1-2-at-m uk-text-center uk-margin-auto uk-margin-auto-vertical">Headline</h1></div>
       </div>`
   });
 };
@@ -33,7 +33,7 @@ export const ParallaxHeadline = (bm, c) => {
     },
     label: 'Parallax Headline',
     category: 'Parallax',
-    content: `<div class="uk-height-large uk-background-cover uk-light uk-flex mock-img" uk-parallax="bgy: -200">
+    content: `<div class="uk-height-large uk-background-cover uk-light uk-flex mock-img" uk-parallax="bgy: -200;">
     <h1 class="uk-width-1-2-at-m uk-text-center uk-margin-auto uk-margin-auto-vertical">Headline</h1>
 </div>`
   });
@@ -63,7 +63,7 @@ export const ParallaxViewport = (bm, c) => {
     label: 'Parallax Viewport',
     category: 'Parallax',
     content: `<div class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top mock-img">
-    <div uk-parallax="opacity: 0,1; y: 100,0; viewport: 0.5"><h1 class="uk-width-1-2-at-m uk-text-center uk-margin-auto uk-margin-auto-vertical">Headline</h1></div>
+    <div uk-parallax="opacity: 0,1; y: 100,0; viewport: 0.5;"><h1 class="uk-width-1-2-at-m uk-text-center uk-margin-auto uk-margin-auto-vertical">Headline</h1></div>
 </div>`
   });
 }
@@ -75,8 +75,8 @@ export const ParallaxNesting = (bm, c) => {
     },
     label: 'Parallax Nesting',
     category: 'Parallax',
-    content: `<div class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top mock-img" uk-parallax="bgy: -200">
-    <h1 class="uk-width-1-2-at-m uk-text-center uk-margin-auto uk-margin-auto-vertical" uk-parallax="y: 100,0">Headline</h1>
+    content: `<div class="uk-height-large uk-background-cover uk-light uk-flex uk-flex-top mock-img" uk-parallax="bgy: -200;">
+    <h1 class="uk-width-1-2-at-m uk-text-center uk-margin-auto uk-margin-auto-vertical" uk-parallax="y: 100,0;">Headline</h1>
 </div>`
   });
 }
@@ -186,7 +186,7 @@ export default (domc, editor) => {
           parallax = '';
         }
         if (parallax.includes(` ${attribut}: `)) {
-          parallax = parallax.replace(new RegExp(` ${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
+          parallax = parallax.replace(new RegExp(`(\s|)${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
         } else if (state) {
           parallax += ` ${attribut}: ${state};`;
         }
@@ -300,7 +300,7 @@ export default (domc, editor) => {
           parallax = '';
         }
         if (parallax.includes(` ${attribut}: `)) {
-          parallax = parallax.replace(new RegExp(` ${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
+          parallax = parallax.replace(new RegExp(`(\s|)${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
         } else if (state) {
           parallax += ` ${attribut}: ${state};`;
         }
