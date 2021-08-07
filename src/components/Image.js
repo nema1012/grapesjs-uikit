@@ -32,7 +32,7 @@ export const ImageSlider = (bm, c) => {
     },
     label: 'Image Slider',
     category: 'Media',
-    content: `<div uk-slideshow="animation: push" class="uk-slideshow">
+    content: `<div uk-slideshow="animation: push;" class="uk-slideshow">
     <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow-container>
   <ul class="uk-slideshow-items">
       <li data-gjs-type="image-container">
@@ -326,14 +326,16 @@ export default (domc, editor) => {
 
         let existing = container.components().filter(function (comp) {
           return comp.attributes.content.includes('uk-slideshow-items-navigation');
-        })[0];
+        });
 
-        if (state && !existing) {
+        if (state && (!existing || existing.length === 0)) {
           var comp = container.components().add({
             content: navigation
           });
         } else if (!state && existing) {
-          existing.destroy();
+          for (let ex of existing) {
+            ex.destroy();
+          }
         }
 
         this.refresh();
