@@ -36,13 +36,13 @@ export const ImageSlider = (bm, c) => {
     <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow-container>
   <ul class="uk-slideshow-items">
       <li data-gjs-type="image-container">
-          <img data-gjs-type="uk-image" loading="lazy" src="https://via.placeholder.com/1200x800/0000FF/808080" width="1800" height="1200" alt="" uk-cover>
+          <img data-gjs-type="uk-image" src="https://via.placeholder.com/1200x800/0000FF/808080" width="1800" height="1200" alt="" uk-cover>
       </li>
       <li data-gjs-type="image-container">
-          <img data-gjs-type="uk-image" loading="lazy" src="https://via.placeholder.com/1200x800/FF0000/FFFFFF" width="1800" height="1200" alt="" uk-cover>
+          <img data-gjs-type="uk-image" src="https://via.placeholder.com/1200x800/FF0000/FFFFFF" width="1800" height="1200" alt="" uk-cover>
       </li>
       <li data-gjs-type="image-container">
-          <img data-gjs-type="uk-image" loading="lazy" src="https://via.placeholder.com/1200x800/FFFF00/000000" width="1800" height="1200" alt="" uk-cover>
+          <img data-gjs-type="uk-image" src="https://via.placeholder.com/1200x800/FFFF00/000000" width="1800" height="1200" alt="" uk-cover>
       </li>
   </ul>
   </div>
