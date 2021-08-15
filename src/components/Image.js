@@ -32,7 +32,7 @@ export const ImageSlider = (bm, c) => {
     },
     label: 'Image Slider',
     category: 'Media',
-    content: `<div uk-slideshow class="uk-slideshow">
+    content: `<div uk-slideshow>
     <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow-container>
   <ul class="uk-slideshow-items">
       <li data-gjs-type="image-container">
@@ -77,6 +77,71 @@ export const ResponsiveHeight = (bm, c) => {
   });
 }
 
+export const Lightbox = (bm, c) => {
+  bm.add('lightbox', {
+    attributes: {
+      class: 'fa fa-image'
+    },
+    label: 'Lightbox',
+    category: 'Media',
+    content: `<div uk-lightbox>
+    <div uk-grid class="uk-child-width-1-3-at-m">
+    <div>
+        <a class="uk-inline" href="https://via.placeholder.com/1200x800/FFFF00/000000.png" data-caption="Caption 1" uk-lightbox-image>
+            <img src="https://via.placeholder.com/1200x800/FFFF00/000000.png" alt="">
+        </a>
+    </div>
+    <div>
+        <a class="uk-inline" href="https://via.placeholder.com/1200x800/22FF00/000000.jpg" data-caption="Caption 2" uk-lightbox-image>
+            <img src="https://via.placeholder.com/1200x800/22FF00/000000.jpg" alt="">
+        </a>
+    </div>
+    <div>
+        <a class="uk-inline" href="https://via.placeholder.com/1200x800/665533/000000.png" data-caption="Caption 3" uk-lightbox-image>
+            <img src="https://via.placeholder.com/1200x800/665533/000000.png" alt="">
+        </a>
+    </div>
+    </div>
+</div>`
+  });
+}
+
+export const SliderLightbox = (bm, c) => {
+  bm.add('sliderLightbox', {
+    attributes: {
+      class: 'fa fa-image'
+    },
+    label: 'Slider with Lightbox',
+    category: 'Media',
+    content: `<div uk-slideshow>
+    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow-container>
+    <div uk-lightbox="animation: slide">
+        <ul class="uk-slideshow-items">
+          <li> 
+            <a class="uk-inline" href="https://via.placeholder.com/1200x800/FFFF00/000000.png" data-caption="Caption 1" uk-lightbox-image>
+              <img src="https://via.placeholder.com/1200x800/FFFF00/000000.png" alt="">
+            </a>
+          </li>
+          <li>
+            <a class="uk-inline" href="https://via.placeholder.com/1200x800/22FF00/000000.jpg" data-caption="Caption 2" uk-lightbox-image>
+              <img src="https://via.placeholder.com/1200x800/22FF00/000000.jpg" alt="">
+             </a>
+          </li>
+          <li>
+           <a class="uk-inline" href="https://via.placeholder.com/1200x800/665533/000000.png" data-caption="Caption 3" uk-lightbox-image>
+            <img src="https://via.placeholder.com/1200x800/665533/000000.png" alt="">
+          </a>
+          </li>
+        </ul>
+      </div>
+          <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+    </div>
+    </div>
+    </div>`
+  });
+}
+
 export default (domc, editor) => {
   const comps = editor.DomComponents;
   const defaultType = comps.getType('default');
@@ -85,6 +150,9 @@ export default (domc, editor) => {
   const imageType = domc.getType('image');
   const imageModel = imageType.model;
   const imageView = imageType.view;
+  const linkType = domc.getType('link');
+  const linkModel = linkType.model;
+  const linkView = linkType.view;
 
   domc.addType('uk-image', {
     model: imageModel.extend({
@@ -362,7 +430,7 @@ export default (domc, editor) => {
       }
     }, {
       isComponent: function (el) {
-        if (el && el.classList && el.classList.contains('uk-slideshow')) {
+        if (el && el.hasAttribute && el.hasAttribute('uk-slideshow')) {
           return { type: 'uk-slideshow' };
         }
       }
@@ -427,4 +495,125 @@ export default (domc, editor) => {
       }),
     view: defaultView
   });
+
+  domc.addType('lightbox', {
+    model: defaultModel.extend({
+      defaults: Object.assign({}, defaultModel.prototype.defaults, {
+        'name': 'Lightbox',
+        traits: [
+          {
+            type: 'select',
+            options: [
+              { value: 'slide', name: 'slide' },
+              { value: 'fade', name: 'fade' },
+              { value: 'scale', name: 'scale' },
+            ],
+            label: 'Animation',
+            name: 'animation',
+            changeProp: 1
+          },
+          {
+            type: 'number',
+            label: 'autoplay',
+            name: 'autoplay',
+            changeProp: 1,
+            step: 10,
+          },
+          {
+            type: 'number',
+            label: 'autoplay-interval',
+            name: 'autoplay-interval',
+            changeProp: 1,
+            step: 10,
+          },
+          {
+            type: 'checkbox',
+            label: 'pause-on-hover',
+            name: 'pause-on-hover',
+            changeProp: 1
+          },
+        ].concat(defaultModel.prototype.defaults.traits)
+      }),
+      init2() {
+        const child = this.components();
+
+        this.listenTo(this, 'change:animation', this.updateAnimation);
+        this.listenTo(this, 'change:autoplay', this.updateAutoplay);
+        this.listenTo(this, 'change:autoplay-interval', this.updateAnimationInterval);
+        this.listenTo(this, 'change:pause-on-hover', this.updatePauseOnHover);
+        this.listenTo(child, 'add', this.refresh);
+        this.set('animation', 'slide');
+      },
+      updateAnimation() {this.update('animation')},
+      updateAutoplay() {this.update('autoplay')},
+      updateAnimationInterval() {this.update('autoplay-interval')},
+      updatePauseOnHover() {this.update('pause-on-hover')},
+      refresh() {
+        UIkit.update(document.body, 'update');
+      },
+      update(attribut) {
+        const state = this.get(attribut);
+
+        let item = this.getAttributes()['uk-lightbox'];
+
+        if (!item) {
+          item = '';
+        }
+        if (state === '' && item.includes(` ${attribut}: `)) {
+          item = item.replace(new RegExp(`(\s|)${attribut}: ([^;]+);`), '');
+        } else if (item.includes(` ${attribut}: `)) {
+          item = item.replace(new RegExp(`(\s|)${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
+        } else if (state && state != '') {
+          item += ` ${attribut}: ${state};`;
+        }
+        let attrs = [];
+        attrs['uk-lightbox'] = item
+        this.addAttributes(attrs);
+        this.refresh();
+      }
+    }, {
+      isComponent: function (el) {
+        if (el.hasAttribute && el.hasAttribute('uk-lightbox')) {
+          return { type: 'lightbox' };
+        }
+      }
+    }),
+    view: defaultView
+  });
+
+  domc.addType('uk-lightbox-image', {
+    model: linkModel.extend({
+      defaults: Object.assign({}, linkModel.prototype.defaults, {
+        'name': 'lightbox-image',
+        traits: [
+          {
+            type: 'text',
+            label: 'Photo Text',
+            name: 'data-caption',
+            changeProp: 1
+          }
+        ].concat(linkModel.prototype.defaults.traits)
+      }),
+      init() {
+        this.listenTo(this, 'change:data-caption', this.dataCaption);
+        UIkit.update(document.body, 'update');
+      },
+      updateDataCaption() {this.update('data-caption')},
+      update(attribut) {
+        const state = this.get(attribut);
+        let attrs = [];
+        attrs['data-caption'] = state
+        this.addAttributes(attrs);
+        UIkit.update(document.body, 'update');
+      }
+    }, {
+      isComponent: function (el) {
+        if (el.hasAttribute && el.hasAttribute('uk-lightbox-image')) {
+          return { type: 'uk-lightbox-image' };
+        }
+      }
+    }),
+    view: linkView
+  });
+
 }

@@ -1,10 +1,12 @@
 import Card, {CardBlock, CardBlockHorizonzal} from './components/Card';
 import Navigation, {TabBlock} from './components/Navigation'
-import ImageComponents, {Image, BackgroundImage, ImageSlider, UcCover, ResponsiveHeight} from './components/Image'
+import ImageComponents, {Image, BackgroundImage, ImageSlider, UcCover, ResponsiveHeight, Lightbox, SliderLightbox} from './components/Image'
 
 import Default, {Article, Column, ColumnDivider, ColumnDividerWithSpan, Container} from './components/Default';
 import AccordionElements, {Accordion} from './components/Accordion';
 import {Section} from './components/Section';
+import {Flex, FlexColumn, FlexWithImage} from './components/Flex';
+import GridElements, {Grid, GridDivider, GridWitdh, GridMasonry} from './components/Grid'
 import ParallaxElements, {Parallax, ParallaxHeadline, ParallaxTarget, ParallaxMulti, ParallaxViewport, ParallaxNesting} from './components/Parallax';
 
 let defaultBlocks = [
@@ -18,6 +20,11 @@ export default (editor, opts = {}) => {
   const cats = c.blockCategories;
 
   Default(domc);
+  GridElements(domc, editor);
+  Grid(bm, c);
+  GridDivider(bm, c);
+  GridWitdh(bm, c);
+  GridMasonry(bm, c);
 
   CardBlock(bm, c);
   CardBlockHorizonzal(bm, c);
@@ -28,6 +35,8 @@ export default (editor, opts = {}) => {
   Image(bm, c);
   BackgroundImage(bm, c);
   ImageSlider(bm, c);
+  Lightbox(bm, c);
+  SliderLightbox(bm, c);
   UcCover(bm, c);
   ResponsiveHeight(bm, c);
   AccordionElements(domc, editor);
@@ -45,6 +54,9 @@ export default (editor, opts = {}) => {
   ParallaxNesting(bm, c);
   ParallaxViewport(bm, c);
   ParallaxElements(domc, editor);
+  Flex(bm, c);
+  FlexWithImage(bm, c);
+  FlexColumn(bm, c);
 
   defaultBlocks.forEach(element => {
     editor.BlockManager.add(element.id, element);
