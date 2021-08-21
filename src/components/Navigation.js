@@ -16,7 +16,7 @@ export const TabBlock = (bm, c) => {
 <nav class="uk-navbar-container" uk-navbar >
     <div class="uk-navbar-left" ${navbarContainer}>
         <ul class="uk-navbar-nav" ${attrTabContainer} uk-switcher="connect: .uk-switcher">
-            <li ${attrTab}><a href='#'>Tab 1</a></li>
+            <li ${attrTab}><a href='#'><p>Tab 1</p></a></li>
             <li ${attrTab}><a href='#'>Tab 2</a></li>
             <li ${attrTab}><a href='#'>Tab 3</a></li>
         </ul>
@@ -207,7 +207,6 @@ export default (domc, editor) => {
         }),
 
         view: defaultView.extend({
-
             onRender() {
                 const tabContainer = this.model.find(`[${attrTabContainer}]`)[0];
                 const model = this.model;

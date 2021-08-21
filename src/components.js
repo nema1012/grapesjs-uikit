@@ -2,12 +2,13 @@ import Card, {CardBlock, CardBlockHorizonzal} from './components/Card';
 import Navigation, {TabBlock} from './components/Navigation'
 import ImageComponents, {Image, BackgroundImage, ImageSlider, UcCover, ResponsiveHeight, Lightbox, SliderLightbox} from './components/Image'
 
-import Default, {Article, Column, ColumnDivider, ColumnDividerWithSpan, Container} from './components/Default';
+import Default from './components/Default';
 import AccordionElements, {Accordion} from './components/Accordion';
 import {Section} from './components/Section';
 import {Flex, FlexColumn, FlexWithImage} from './components/Flex';
 import GridElements, {Grid, GridDivider, GridWitdh, GridMasonry} from './components/Grid'
 import ParallaxElements, {Parallax, ParallaxHeadline, ParallaxTarget, ParallaxMulti, ParallaxViewport, ParallaxNesting} from './components/Parallax';
+import Others, {Article, Column, ColumnDivider, ColumnDividerWithSpan, Container, ViewPortHeight} from './components/Others';
 
 let defaultBlocks = [
 ]
@@ -20,6 +21,8 @@ export default (editor, opts = {}) => {
   const cats = c.blockCategories;
 
   Default(domc);
+  Others(domc, editor);
+  ViewPortHeight(bm, c);
   GridElements(domc, editor);
   Grid(bm, c);
   GridDivider(bm, c);

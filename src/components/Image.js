@@ -34,7 +34,7 @@ export const ImageSlider = (bm, c) => {
     category: 'Media',
     content: `<div uk-slideshow>
     <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow-container>
-  <ul class="uk-slideshow-items">
+  <ul class="uk-slideshow-items uk-height-viewport" uk-height-viewport=" offset-top: true; offset-bottom: 30">
       <li data-gjs-type="image-container">
           <img data-gjs-type="uk-image" src="https://via.placeholder.com/1200x800/0000FF/808080" width="1800" height="1200" alt="" uk-cover>
       </li>
@@ -115,8 +115,8 @@ export const SliderLightbox = (bm, c) => {
     category: 'Media',
     content: `<div uk-slideshow>
     <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow-container>
-    <div uk-lightbox="animation: slide">
-        <ul class="uk-slideshow-items">
+    <div uk-lightbox=" animation: slide">
+        <ul class="uk-slideshow-items uk-height-viewport">
           <li> 
             <a class="uk-inline" href="https://via.placeholder.com/1200x800/FFFF00/000000.png" data-caption="Caption 1" uk-lightbox-image>
               <img src="https://via.placeholder.com/1200x800/FFFF00/000000.png" alt="">
@@ -359,6 +359,19 @@ export default (domc, editor) => {
         this.listenTo(this, 'change:autoplay', this.updateAutoplay);
         this.listenTo(this, 'change:dotnav', this.updateDotnav);
         this.listenTo(this, 'change:navigation', this.updateNavigation);
+
+        const attributes = this.getAttributes()['uk-slideshow']
+        if (attributes) {
+          const attrs = attributes.split(';');
+
+          for (let idx in attrs) {
+            const attribute = attrs[idx].split(':');
+            if (attribute.length > 1) {
+              this.set(attribute[0].replace(/\s/g, ''), attribute[1].replace(/\s/g, ''));
+            }
+          }
+        };
+
         this.set('animation', 'slide');
         this.set('navigation', true);
       },
@@ -371,8 +384,10 @@ export default (domc, editor) => {
         if (!slideShow) {
           slideShow = '';
         }
-        if (slideShow.includes(attribut)) {
-          slideShow = slideShow.replace(new RegExp(`(\s|)${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
+        if (state === '' && item.includes(` ${attribut}: `)) {
+          item = item.replace(new RegExp(` ${attribut}: ([^;]+);`), '');
+        } else if (slideShow.includes(attribut)) {
+          slideShow = slideShow.replace(new RegExp(` ${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
         } else if (state) {
           slideShow += ` ${attribut}: ${state};`;
         }
@@ -542,6 +557,18 @@ export default (domc, editor) => {
         this.listenTo(this, 'change:autoplay-interval', this.updateAnimationInterval);
         this.listenTo(this, 'change:pause-on-hover', this.updatePauseOnHover);
         this.listenTo(child, 'add', this.refresh);
+
+        const attributes = this.getAttributes()['uk-lightbox']
+        if (attributes) {
+          const attrs = attributes.split(';');
+
+          for (let idx in attrs) {
+            const attribute = attrs[idx].split(':');
+            if (attribute.length > 1) {
+              this.set(attribute[0].replace(/\s/g, ''), attribute[1].replace(/\s/g, ''));
+            }
+          }
+        };
         this.set('animation', 'slide');
       },
       updateAnimation() {this.update('animation')},
@@ -560,9 +587,9 @@ export default (domc, editor) => {
           item = '';
         }
         if (state === '' && item.includes(` ${attribut}: `)) {
-          item = item.replace(new RegExp(`(\s|)${attribut}: ([^;]+);`), '');
+          item = item.replace(new RegExp(` ${attribut}: ([^;]+);`), '');
         } else if (item.includes(` ${attribut}: `)) {
-          item = item.replace(new RegExp(`(\s|)${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
+          item = item.replace(new RegExp(` ${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
         } else if (state && state != '') {
           item += ` ${attribut}: ${state};`;
         }
