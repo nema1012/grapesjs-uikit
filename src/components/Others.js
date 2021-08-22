@@ -92,6 +92,14 @@ export const ViewPortHeight = (bm, c) => {
     });
 };
 
+export const Icon = (bm, c) => {
+  bm.add('icon', {
+      label: 'Icon',
+      category: 'Components',
+      content: `<span uk-icon=" icon: heart;"></span>`
+  });
+};
+
 export default (domc, editor) => {
   const comps = editor.DomComponents;
   const defaultType = comps.getType('default');
@@ -199,6 +207,79 @@ domc.addType('viewportHeight', {
       isComponent: function (el) {
         if ((el.hasAttribute && el.hasAttribute('uk-height-viewport')) || (el && el.classList && el.classList.contains('uk-height-viewport'))) {
           return { type: 'viewportHeight' };
+        }
+      }
+    }),
+    view: defaultView
+  });
+
+  domc.addType('uiicon', {
+    model: defaultModel.extend({
+      defaults: Object.assign({}, defaultModel.prototype.defaults, {
+        'name': 'icon',
+        traits: [
+          {
+            type: 'text',
+            label: 'icon',
+            name: 'icon',
+            changeProp: 1
+          },
+          {
+            type: 'number',
+            label: 'ratio',
+            name: 'ratio',
+            changeProp: 1,
+          },
+        ].concat(defaultModel.prototype.defaults.traits)
+      }),
+      init2() {    
+        this.listenTo(this, 'change:icon', this.updateIcon);
+        this.listenTo(this, 'change:ratio', this.updateRatio);
+
+        const attributes = this.getAttributes()['uk-icon']
+        if (attributes) {
+          const attrs = attributes.split(';');
+
+          for (let idx in attrs) {
+            const attribute = attrs[idx].split(':');
+            if (attribute.length > 1) {
+              this.set(attribute[0].replace(/\s/g, ''), attribute[1].replace(/\s/g, ''));
+            }
+          }
+        };
+      },
+      updateIcon() {this.update('icon')},
+      updateRatio() {this.update('ratio')},
+      refresh() {
+        UIkit.update(document.body, 'update');
+      },
+      update(attribut) {
+        const state = this.get(attribut);
+
+        let item = this.getAttributes()['uk-icon'];
+        if (this.view && this.view.$el[0].children[0]) {
+          this.view.$el[0].removeChild(this.view.$el[0].children[0])
+        }
+        if (!item) {
+          item = '';
+        }
+        if (state === '' && item.includes(` ${attribut}: `)) {
+          item = item.replace(new RegExp(` ${attribut}: ([^;]+);`), '');
+        } else if (item.includes(` ${attribut}: `)) {
+          item = item.replace(new RegExp(` ${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
+        } else if (state && state != '') {
+          item += ` ${attribut}: ${state};`;
+        }
+        let attrs = [];
+        attrs['uk-icon'] = item
+        this.addAttributes(attrs);
+
+        this.refresh();
+      }
+    }, {
+      isComponent: function (el) {
+        if ((el.hasAttribute && el.hasAttribute('uk-icon')) || (el && el.classList && el.classList.contains('uk-icon'))) {
+          return { type: 'uiicon' };
         }
       }
     }),

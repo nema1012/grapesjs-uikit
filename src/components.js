@@ -8,7 +8,7 @@ import {Section} from './components/Section';
 import {Flex, FlexColumn, FlexWithImage} from './components/Flex';
 import GridElements, {Grid, GridDivider, GridWitdh, GridMasonry} from './components/Grid'
 import ParallaxElements, {Parallax, ParallaxHeadline, ParallaxTarget, ParallaxMulti, ParallaxViewport, ParallaxNesting} from './components/Parallax';
-import Others, {Article, Column, ColumnDivider, ColumnDividerWithSpan, Container, ViewPortHeight} from './components/Others';
+import Others, {Article, Column, ColumnDivider, ColumnDividerWithSpan, Container, ViewPortHeight, Icon} from './components/Others';
 
 let defaultBlocks = [
 ]
@@ -22,6 +22,7 @@ export default (editor, opts = {}) => {
 
   Default(domc);
   Others(domc, editor);
+  Icon(bm, c);
   ViewPortHeight(bm, c);
   GridElements(domc, editor);
   Grid(bm, c);
