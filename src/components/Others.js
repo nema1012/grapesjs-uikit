@@ -93,8 +93,11 @@ export const ViewPortHeight = (bm, c) => {
 };
 
 export const Icon = (bm, c) => {
-  bm.add('icon', {
-      label: 'Icon',
+  bm.add('ukicon', {
+    attributes: {
+      class: 'fa fa-smile-o'
+    },
+      label: 'UK-Icon',
       category: 'Components',
       content: `<span uk-icon=" icon: heart;"></span>`
   });
@@ -216,7 +219,7 @@ domc.addType('viewportHeight', {
   domc.addType('uiicon', {
     model: defaultModel.extend({
       defaults: Object.assign({}, defaultModel.prototype.defaults, {
-        'name': 'icon',
+        'name': 'ui-icon',
         traits: [
           {
             type: 'text',

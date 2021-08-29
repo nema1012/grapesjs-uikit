@@ -6,13 +6,13 @@ export const Grid = (bm, c) => {
     category: 'Grid',
     content: `<div class="uk-child-width-expand-at-s uk-text-center" uk-grid>
     <div>
-        <div class="uk-card uk-card-default uk-card-body">Item</div>
+        <div class="uk-card uk-card-default uk-card-body"><p>Item</p></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-card-body">Item</div>
+        <div class="uk-card uk-card-default uk-card-body"><p>Item</p></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-card-body">Item</div>
+        <div class="uk-card uk-card-default uk-card-body"><p>Item</p></div>
     </div>
 </div>`
   });
@@ -24,15 +24,15 @@ export const NestedGrid = (bm, c) => {
     category: 'Grid',
     content: `<div class="uk-child-width-1-2 uk-text-center" uk-grid>
     <div>
-        <div class="uk-card uk-card-default uk-card-body">Item</div>
+        <div class="uk-card uk-card-default uk-card-body"><p>Item</p></div>
     </div>
     <div>
         <div class="uk-child-width-1-2 uk-text-center" uk-grid>
             <div>
-                <div class="uk-card uk-card-primary uk-card-body">Item</div>
+                <div class="uk-card uk-card-primary uk-card-body"><p>Item</p></div>
             </div>
             <div>
-                <div class="uk-card uk-card-primary uk-card-body">Item</div>
+                <div class="uk-card uk-card-primary uk-card-body"><p>Item</p></div>
             </div>
         </div>
     </div>
@@ -58,13 +58,13 @@ export const GridWitdh = (bm, c) => {
     category: 'Grid',
     content: `<div class="uk-text-center" uk-grid>
     <div class="uk-width-auto-at-m">
-        <div class="uk-card uk-card-default uk-card-body">Auto</div>
+        <div class="uk-card uk-card-default uk-card-body"<p>>Auto</p></div>
     </div>
     <div class="uk-width-1-3-at-m">
-        <div class="uk-card uk-card-default uk-card-body">1-3</div>
+        <div class="uk-card uk-card-default uk-card-body"><p>1-3</p></div>
     </div>
     <div class="uk-width-expand-at-m">
-        <div class="uk-card uk-card-default uk-card-body">Expand</div>
+        <div class="uk-card uk-card-default uk-card-body"><p>Expand</p></div>
     </div>
 </div>`
   });
@@ -76,31 +76,31 @@ export const GridMasonry = (bm, c) => {
     category: 'Grid',
     content: `<div class="uk-child-width-1-2-at-s uk-child-width-1-3-at-m" uk-grid="masonry: true">
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 100px">Item</div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 100px"><p>Item</p></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 130px">Item</div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 130px"><p>Item</p></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 150px">Item</div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 150px"><p>Item</p></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 160px">Item</div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 160px"><p>Item</p></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 120px">Item</div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 120px"><p>Item</p></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 140px">Item</div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 140px"><p>Item</p></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 200px">Item</div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 200px"><p>Item</p></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 180px">Item</div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 180px"><p>Item</p></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 140px">Item</div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 140px"><p>Item</p></div>
     </div>
 </div>`
   });

@@ -19,9 +19,9 @@ export const FlexWithImage = (bm, c) => {
       label: 'Flex',
       category: 'Flex',
       content: `<div class="uk-flex">
-      <div class="uk-card uk-card-default uk-card-body">Item 1</div>
-      <div class="uk-card uk-card-default uk-card-body uk-margin-left">Item 2</div>
-      <div class="uk-card uk-card-default uk-card-body uk-margin-left">Item 3</div>
+      <div class="uk-card uk-card-default uk-card-body"><p>Item 1</p></div>
+      <div class="uk-card uk-card-default uk-card-body uk-margin-left"><p>Item 2</p></div>
+      <div class="uk-card uk-card-default uk-card-body uk-margin-left"><p>Item 3</p></div>
   </div>`
     });
   };
@@ -31,9 +31,9 @@ export const FlexWithImage = (bm, c) => {
       label: 'Flex Column',
       category: 'Flex',
       content: `<div class="uk-flex uk-flex-column uk-width-1-3">
-      <div class="uk-card uk-card-default uk-card-body">Item 1</div>
-      <div class="uk-card uk-card-default uk-card-body uk-margin-top">Item 2</div>
-      <div class="uk-card uk-card-default uk-card-body uk-margin-top">Item 3</div>
+      <div class="uk-card uk-card-default uk-card-body"><p>Item 1</div>
+      <div class="uk-card uk-card-default uk-card-body uk-margin-top"><p>Item 2</p></div>
+      <div class="uk-card uk-card-default uk-card-body uk-margin-top"><p>Item 3</p></div>
   </div>`
     });
   };
