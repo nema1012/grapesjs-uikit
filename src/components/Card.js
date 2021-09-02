@@ -20,7 +20,8 @@ export const CardBlockHorizonzal = (bm, c) => {
         `,
     category: 'Components',
     content: {
-      type: 'card-horizontal'
+      type: 'card',
+      classes: ['uk-grid']
     }
   });
 };
@@ -117,6 +118,8 @@ export default (domc, editor) => {
         this.set('card-img-top', true);
         this.set('card-body', true);
       },
+      cardImageRight() { this.createCardComponent('card-img-right'); },
+      cardImageLeft() { this.createCardComponent('card-img-left'); },
       cardImageTop() { this.createCardComponent('card-img-top'); },
       cardImageBottom() { this.createCardComponent('card-img-bottom'); },
       cardHeader() { this.createCardComponent('card-header'); },
@@ -189,161 +192,6 @@ export default (domc, editor) => {
     }),
     view: defaultView
   });
-
-  domc.addType('card-horizontal', {
-    model: defaultModel.extend({
-      defaults: Object.assign({}, defaultModel.prototype.defaults, {
-        'name': 'Card',
-        classes: ['uk-card', 'uk-card-default', 'uk-grid'],
-        traits: [
-          {
-            type: 'checkbox',
-            label: 'Image Left',
-            name: 'card-img-left',
-            changeProp: 1
-          },
-          {
-            type: 'checkbox',
-            label: 'Image Right',
-            name: 'card-img-right',
-            changeProp: 1
-          },
-          {
-            type: 'checkbox',
-            label: 'Header',
-            name: 'card-header',
-            changeProp: 1
-          },
-          {
-            type: 'checkbox',
-            label: 'Image',
-            name: 'card-img',
-            changeProp: 1
-          },
-          {
-            type: 'checkbox',
-            label: 'Image Overlay',
-            name: 'card-img-overlay',
-            changeProp: 1
-          },
-          {
-            type: 'checkbox',
-            label: 'Body',
-            name: 'card-body',
-            changeProp: 1
-          },
-          {
-            type: 'checkbox',
-            label: 'Footer',
-            name: 'card-footer',
-            changeProp: 1
-          },
-          {
-            type: 'class_select',
-            options: [
-              { value: '', name: 'Default' },
-              { value: 'uk-card-hover', name: 'Hover' }
-            ],
-            label: 'Hover'
-          },
-          {
-            type: 'class_select',
-            options: [
-              { value: '', name: 'None' },
-              { value: 'uk-card-default', name: 'Default' },
-              { value: 'uk-card-primary', name: 'Primary' },
-              { value: 'uk-card-secondary', name: 'Secondary' }
-
-            ],
-            label: 'Cart Style'
-          },
-        ].concat(defaultModel.prototype.defaults.traits)
-      }),
-      init2() {
-        this.listenTo(this, 'change:card-img-left', this.cardImageLeft);
-        this.listenTo(this, 'change:card-img-right', this.cardImageRight);
-        this.listenTo(this, 'change:card-header', this.cardHeader);
-        this.listenTo(this, 'change:card-img', this.cardImage);
-        this.listenTo(this, 'change:card-img-overlay', this.cardImageOverlay);
-        this.listenTo(this, 'change:card-body', this.cardBody);
-        this.listenTo(this, 'change:card-footer', this.cardFooter);
-        this.components().comparator = 'card-order';
-        this.set('card-img-left', true);
-        this.set('card-body', true);
-      },
-      cardImageRight() { this.createCardComponent('card-img-right'); },
-      cardImageLeft() { this.createCardComponent('card-img-left'); },
-      cardHeader() { this.createCardComponent('card-header'); },
-      cardImage() { this.createCardComponent('card-img'); },
-      cardImageOverlay() { this.createCardComponent('card-img-overlay'); },
-      cardBody() { this.createCardComponent('card-body'); },
-      cardFooter() { this.createCardComponent('card-footer'); },
-      createCardComponent(prop) {
-        const state = this.get(prop);
-        const type = prop.replace(/-/g, '_').replace(/img/g, 'image')
-        let children = this.components();
-        let existing = children.filter(function (comp) {
-          return comp.attributes.type === type;
-        })[0]; // should only be one of each.
-
-        if (state && !existing) {
-          var comp = children.add({
-            type: type
-          });
-          let comp_children = comp.components();
-          if (prop.indexOf('card-img') != -1) {
-            comp_children.add({
-              type: 'card_image',
-            });
-          }
-          if (prop === 'card-header') {
-            comp_children.add({
-              type: 'header',
-              tagName: 'div',
-              classes: ['uk-card-header'],
-              content: 'Card Header'
-            });
-          }
-          if (prop === 'card-title') {
-            comp_children.add({
-              type: 'header',
-              tagName: 'h3',
-              classes: ['uk-card-title'],
-              content: 'Card title'
-            });
-            comp_children.add({
-              type: 'text',
-              tagName: 'p',
-              content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-            });
-          }
-          if (prop === 'card-body') {
-            comp_children.add({
-              type: 'default',
-              tagName: 'div',
-              classes: ['uk-card-body'],
-              content: 'Card Body',
-              content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-            });
-          }
-          this.order();
-        } else if (!state && existing) {
-          existing.destroy();
-        }
-      },
-      order() {
-
-      }
-    }, {
-      isComponent(el) {
-        if (el && el.classList && el.classList.contains('card')) {
-          return { type: 'card' };
-        }
-      }
-    }),
-    view: defaultView
-  });
-
   
 
   domc.addType('card_image', {
