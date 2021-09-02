@@ -186,7 +186,7 @@ export default (domc, editor) => {
           parallax = '';
         }
         if (parallax.includes(` ${attribut}: `)) {
-          parallax = parallax.replace(new RegExp(`(\s|)${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
+          parallax = parallax.replace(new RegExp(` ${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
         } else if (state) {
           parallax += ` ${attribut}: ${state};`;
         }
@@ -300,7 +300,7 @@ export default (domc, editor) => {
           parallax = '';
         }
         if (parallax.includes(` ${attribut}: `)) {
-          parallax = parallax.replace(new RegExp(`(\s|)${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
+          parallax = parallax.replace(new RegExp(` ${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
         } else if (state) {
           parallax += ` ${attribut}: ${state};`;
         }

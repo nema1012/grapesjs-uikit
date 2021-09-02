@@ -137,6 +137,11 @@ export default (domc, editor) => {
             type: type
           });
           let comp_children = comp.components();
+          if (prop.indexOf('card-img') != -1) {
+            comp_children.add({
+              type: 'card_image',
+            });
+          }
           if (prop === 'card-header') {
             comp_children.add({
               type: 'header',
@@ -286,6 +291,11 @@ export default (domc, editor) => {
             type: type
           });
           let comp_children = comp.components();
+          if (prop.indexOf('card-img') != -1) {
+            comp_children.add({
+              type: 'card_image',
+            });
+          }
           if (prop === 'card-header') {
             comp_children.add({
               type: 'header',
@@ -359,12 +369,6 @@ export default (domc, editor) => {
         classes: ['uk-card-media-top', 'center'],
         'card-order': 1
       }),
-      init2() {
-      const img = {
-          type: 'card_image',
-      };
-      this.append(img);
-      }
     }, {
       isComponent(el) {
         if (el && el.classList && el.classList.contains('uk-card-media-top')) {
@@ -382,12 +386,6 @@ export default (domc, editor) => {
         classes: ['uk-card-media-bottom', 'uk-cover-container', 'center'],
         'card-order': 10
       }),
-      init2() {
-        const img = {
-            type: 'card_image',
-        };
-        this.append(img);
-        }
     }, {
       isComponent(el) {
         if (el && el.classList && el.classList.contains('uk-card-media-bottom')) {
@@ -405,12 +403,6 @@ export default (domc, editor) => {
         classes: ['uk-card-media-left', 'uk-cover-container'],
         'card-order': 3
       }),
-      init2() {
-        const img = {
-            type: 'card_image',
-        };
-        this.append(img);
-        }
     }, {
       isComponent(el) {
         if (el && el.classList && el.classList.contains('uk-card-media-left')) {
@@ -428,12 +420,6 @@ export default (domc, editor) => {
         classes: ['uk-flex-last-at-s', 'uk-card-media-right', 'uk-cover-container'],
         'card-order': 3
       }),
-      init2() {
-        const img = {
-            type: 'card_image',
-        };
-        this.append(img);
-        }
     }, {
       isComponent(el) {
         if (el && el.classList && el.classList.contains('uk-card-media-right')) {
