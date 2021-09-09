@@ -19,7 +19,7 @@ export const BackgroundImage = (bm, c) => {
     },
     label: 'BackgroundImage',
     category: 'Media',
-    content: `<div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light background-image" uk-img>
+    content: `<div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light background-image" uk-img data-src="${img_src_default}">
     <h1>Background Image</h1>
   </div>`
   });
@@ -32,7 +32,7 @@ export const ImageSlider = (bm, c) => {
     },
     label: 'Image Slider',
     category: 'Media',
-    content: `<div uk-slideshow>
+    content: `<div uk-slideshow=" animation: slide;">
     <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow-container>
   <ul class="uk-slideshow-items uk-height-viewport" uk-height-viewport=" offset-top: true; offset-bottom: 30">
       <li data-gjs-type="image-container">
@@ -84,7 +84,7 @@ export const Lightbox = (bm, c) => {
     },
     label: 'Lightbox',
     category: 'Media',
-    content: `<div uk-lightbox>
+    content: `<div uk-lightbox=" animation: slide;">
     <div uk-grid class="uk-child-width-1-3-at-m">
     <div>
         <a class="uk-inline" href="https://via.placeholder.com/1200x800/FFFF00/000000.png" data-caption="Caption 1" uk-lightbox-image>
@@ -113,7 +113,7 @@ export const SliderLightbox = (bm, c) => {
     },
     label: 'Slider with Lightbox',
     category: 'Media',
-    content: `<div uk-slideshow>
+    content: `<div uk-slideshow=" animation:slide;">
     <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow-container>
     <div uk-lightbox=" animation: slide">
         <ul class="uk-slideshow-items uk-height-viewport">
@@ -213,7 +213,10 @@ export default (domc, editor) => {
 
         if (state && !existing) {
           children.add({
-            type: 'image-overlay'
+            type: `<div class="image-overlay">
+            <h2 class="uk-margin-remove">Center</h2>
+            <p class="uk-margin-remove">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>`
           });
         } else if (!state && existing) {
           existing.destroy();
@@ -291,18 +294,6 @@ export default (domc, editor) => {
         ].concat(defaultModel.prototype.defaults.traits)
       }),
       init2() {
-        this.components().add({
-          type: 'text',
-          tagName: 'h2',
-          classes: ['uk-margin-remove'],
-          content: "Center"
-        });
-        this.components().add({
-          type: 'text',
-          tagName: 'p',
-          classes: ['uk-margin-remove'],
-          content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-        });
       }
     }, {
       isComponent: function (el) {
@@ -372,7 +363,6 @@ export default (domc, editor) => {
           }
         };
 
-        this.set('animation', 'slide');
         this.set('navigation', true);
       },
       updateAnimation() { this.updateSlideShow('animation') },
@@ -486,11 +476,7 @@ export default (domc, editor) => {
         ].concat(defaultModel.prototype.defaults.traits)
       }),
       init2() {
-        let attrs = [];
-        attrs['uk-img'] = '';
-        this.addAttributes(attrs);
         this.listenTo(this, 'change:data-src', this.updateImage);
-        this.set('data-src', img_src_default);
       },
       updateImage() {
         const state = this.get('data-src');
@@ -569,7 +555,6 @@ export default (domc, editor) => {
             }
           }
         };
-        this.set('animation', 'slide');
       },
       updateAnimation() {this.update('animation')},
       updateAutoplay() {this.update('autoplay')},
