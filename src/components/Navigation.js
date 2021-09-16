@@ -258,6 +258,7 @@ export default (domc, editor) => {
             init2() {
                 const attrs = this.getAttributes();
                 attrs[attrTabContainer] = 1;
+                attrs['uk-tab'] = '';
                 attrs['uk-navbar'] = '';
                 this.setAttributes(attrs);
                 const tabs = this.components();
