@@ -362,8 +362,6 @@ export default (domc, editor) => {
             }
           }
         };
-
-        this.set('navigation', true);
       },
       updateAnimation() { this.updateSlideShow('animation') },
       updateAutoplay() { this.updateSlideShow('autoplay') },
