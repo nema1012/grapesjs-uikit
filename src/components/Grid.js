@@ -6,13 +6,13 @@ export const Grid = (bm, c) => {
     category: 'Grid',
     content: `<div class="uk-child-width-expand-at-s uk-text-center" uk-grid>
     <div>
-        <div class="uk-card uk-card-default uk-card-body"><p>Item</p></div>
+        <div class="uk-card uk-card-default"></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-card-body"><p>Item</p></div>
+        <div class="uk-card uk-card-default"></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-card-body"><p>Item</p></div>
+        <div class="uk-card uk-card-default"></div>
     </div>
 </div>`
   });
@@ -24,15 +24,15 @@ export const NestedGrid = (bm, c) => {
     category: 'Grid',
     content: `<div class="uk-child-width-1-2 uk-text-center" uk-grid>
     <div>
-        <div class="uk-card uk-card-default uk-card-body"><p>Item</p></div>
+        <div class="uk-card uk-card-default"></div>
     </div>
     <div>
         <div class="uk-child-width-1-2 uk-text-center" uk-grid>
             <div>
-                <div class="uk-card uk-card-primary uk-card-body"><p>Item</p></div>
+                <div class="uk-card uk-card-primary"></div>
             </div>
             <div>
-                <div class="uk-card uk-card-primary uk-card-body"><p>Item</p></div>
+                <div class="uk-card uk-card-primary"></div>
             </div>
         </div>
     </div>
@@ -45,9 +45,9 @@ export const GridDivider = (bm, c) => {
     label: 'Grid Divider',
     category: 'Grid',
     content: `<div class="uk-grid-divider uk-child-width-expand-at-s" uk-grid>
-    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
-    <div>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-    <div>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</div>
+    <div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>
+    <div><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p></div>
+    <div><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p></div>
 </div>`
   });
 }
@@ -58,13 +58,13 @@ export const GridWitdh = (bm, c) => {
     category: 'Grid',
     content: `<div class="uk-text-center" uk-grid>
     <div class="uk-width-auto-at-m">
-        <div class="uk-card uk-card-default uk-card-body"<p>>Auto</p></div>
+        <div class="uk-card"><p>Auto</p></div>
     </div>
     <div class="uk-width-1-3-at-m">
-        <div class="uk-card uk-card-default uk-card-body"><p>1-3</p></div>
+        <div class="uk-card"><p>1-3</p></div>
     </div>
     <div class="uk-width-expand-at-m">
-        <div class="uk-card uk-card-default uk-card-body"><p>Expand</p></div>
+        <div class="uk-card"><p>Expand</p></div>
     </div>
 </div>`
   });
@@ -76,31 +76,31 @@ export const GridMasonry = (bm, c) => {
     category: 'Grid',
     content: `<div class="uk-child-width-1-2-at-s uk-child-width-1-3-at-m" uk-grid="masonry: true">
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 100px"><p>Item</p></div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 100px"></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 130px"><p>Item</p></div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 130px"></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 150px"><p>Item</p></div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 150px"></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 160px"><p>Item</p></div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 160px"></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 120px"><p>Item</p></div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 120px"></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 140px"><p>Item</p></div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 140px"></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 200px"><p>Item</p></div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 200px"></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 180px"><p>Item</p></div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 180px"></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 140px"><p>Item</p></div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 140px"></div>
     </div>
 </div>`
   });

@@ -61,6 +61,12 @@ export default (domc, editor) => {
           },
           {
             type: 'checkbox',
+            label: 'Title',
+            name: 'card-title',
+            changeProp: 1
+          },
+          {
+            type: 'checkbox',
             label: 'Image',
             name: 'card-img',
             changeProp: 1
@@ -114,8 +120,8 @@ export default (domc, editor) => {
         this.listenTo(this, 'change:card-img-overlay', this.cardImageOverlay);
         this.listenTo(this, 'change:card-body', this.cardBody);
         this.listenTo(this, 'change:card-footer', this.cardFooter);
+        this.listenTo(this, 'change:card-title', this.cardTitle);
         this.components().comparator = 'card-order';
-        this.set('card-img-top', true);
         this.set('card-body', true);
       },
       cardImageRight() { this.createCardComponent('card-img-right'); },
@@ -126,6 +132,7 @@ export default (domc, editor) => {
       cardImage() { this.createCardComponent('card-img'); },
       cardImageOverlay() { this.createCardComponent('card-img-overlay'); },
       cardBody() { this.createCardComponent('card-body'); },
+      cardTitle() { this.createCardComponent('card-title'); },
       cardFooter() { this.createCardComponent('card-footer'); },
       createCardComponent(prop) {
         const state = this.get(prop);
@@ -154,26 +161,13 @@ export default (domc, editor) => {
             });
           }
           if (prop === 'card-title') {
-            comp_children.add({
-              type: 'header',
-              tagName: 'h3',
-              classes: ['uk-card-title'],
-              content: 'Card title'
-            });
-            comp_children.add({
-              type: 'text',
-              tagName: 'p',
-              content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-            });
+            comp_children.add('<div data-gjs-type="card_title"><p>Some quick example text to build on the card title and make up the bulk of the card\'s content.</p></div>');
           }
           if (prop === 'card-body') {
-            comp_children.add({
-              type: 'default',
-              tagName: 'div',
-              classes: ['uk-card-body'],
-              content: 'Card Body',
-              content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-            });
+            comp_children.add('<div class="uk-card-body"><p>Card Body</p></div>');
+          }
+          if (prop === 'card-footer') {
+            comp_children.add('<div class="uk-card-footer"><p>Card Footer</p></div>');
           }
           this.order();
         } else if (!state && existing) {
@@ -185,7 +179,7 @@ export default (domc, editor) => {
       }
     }, {
       isComponent(el) {
-        if (el && el.classList && el.classList.contains('card')) {
+        if (el && el.classList && el.classList.contains('uk-card')) {
           return { type: 'card' };
         }
       }
@@ -282,7 +276,6 @@ export default (domc, editor) => {
     model: defaultModel.extend({
       defaults: Object.assign({}, defaultModel.prototype.defaults, {
         'name': 'Card Header',
-        classes: ['uk-card-header'],
         'card-order': 2
       })
     }, {
@@ -299,7 +292,6 @@ export default (domc, editor) => {
     model: defaultModel.extend({
       defaults: Object.assign({}, defaultModel.prototype.defaults, {
         'name': 'Card Title',
-        classes: ['uk-card-title'],
         'card-order': 3
       })
     }, {
@@ -316,7 +308,7 @@ export default (domc, editor) => {
     model: defaultModel.extend({
       defaults: Object.assign({}, defaultModel.prototype.defaults, {
         'name': 'Card Image Overlay',
-        classes: ['card-img-overlay'],
+        'classes': ['card-img-overlay'],
         'card-order': 4
       })
     }, {
@@ -333,7 +325,6 @@ export default (domc, editor) => {
     model: defaultModel.extend({
       defaults: Object.assign({}, defaultModel.prototype.defaults, {
         'name': 'Card Body',
-        classes: ['uk-card-body'],
         'card-order': 5
       })
     }, {
@@ -350,7 +341,6 @@ export default (domc, editor) => {
     model: defaultModel.extend({
       defaults: Object.assign({}, defaultModel.prototype.defaults, {
         'name': 'Card Footer',
-        classes: ['uk-card-footer'],
         'card-order': 6
       })
     }, {
