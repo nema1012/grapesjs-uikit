@@ -111,6 +111,10 @@ export default (domc, editor) => {
         ].concat(defaultModel.prototype.defaults.traits)
       }),
       init2() {
+        this.components().forEach(comp => {
+          this.set(comp.attributes.type.replace(/_/g, '-').replace(/image/g, 'img'), true);
+        });
+
         this.listenTo(this, 'change:card-img-top', this.cardImageTop);
         this.listenTo(this, 'change:card-img-left', this.cardImageLeft);
         this.listenTo(this, 'change:card-img-right', this.cardImageRight);
@@ -122,7 +126,7 @@ export default (domc, editor) => {
         this.listenTo(this, 'change:card-footer', this.cardFooter);
         this.listenTo(this, 'change:card-title', this.cardTitle);
         this.components().comparator = 'card-order';
-        this.set('card-body', true);
+      //  this.set('card-body', true);
       },
       cardImageRight() { this.createCardComponent('card-img-right'); },
       cardImageLeft() { this.createCardComponent('card-img-left'); },

@@ -152,14 +152,6 @@ export default (domc, editor) => {
         ].concat(defaultModel.prototype.defaults.traits)
       }),
       init2() {
-        this.listenTo(this, 'change:opacity', this.opacity);
-        this.listenTo(this, 'change:x', this.x);
-        this.listenTo(this, 'change:y', this.y);
-        this.listenTo(this, 'change:bgx', this.bgx);
-        this.listenTo(this, 'change:bgy', this.bgy);
-        this.listenTo(this, 'change:scale', this.scale);
-        this.listenTo(this, 'change:viewport', this.viewport);
-
         const attributes = this.getAttributes()['uk-parallax']
         if (attributes) {
           const attrs = attributes.split(';');
@@ -171,6 +163,14 @@ export default (domc, editor) => {
             }
           }
         };
+        
+        this.listenTo(this, 'change:opacity', this.opacity);
+        this.listenTo(this, 'change:x', this.x);
+        this.listenTo(this, 'change:y', this.y);
+        this.listenTo(this, 'change:bgx', this.bgx);
+        this.listenTo(this, 'change:bgy', this.bgy);
+        this.listenTo(this, 'change:scale', this.scale);
+        this.listenTo(this, 'change:viewport', this.viewport);
       },
       opacity() { this.updateParallax('opacity') },
       x() { this.updateParallax('x') },

@@ -6,13 +6,13 @@ export const Grid = (bm, c) => {
     category: 'Grid',
     content: `<div class="uk-child-width-expand-at-s uk-text-center" uk-grid>
     <div>
-        <div class="uk-card uk-card-default"></div>
+        <div class="uk-card uk-card-default"><div class="uk-card-body"><p>Card Body</p></div></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default"></div>
+        <div class="uk-card uk-card-default"><div class="uk-card-body"><p>Card Body</p></div></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default"></div>
+        <div class="uk-card uk-card-default"><div class="uk-card-body"><p>Card Body</p></div></div>
     </div>
 </div>`
   });
@@ -29,10 +29,10 @@ export const NestedGrid = (bm, c) => {
     <div>
         <div class="uk-child-width-1-2 uk-text-center" uk-grid>
             <div>
-                <div class="uk-card uk-card-primary"></div>
+                <div class="uk-card uk-card-primary"><div class="uk-card-body"><p>Card Body</p></div></div>
             </div>
             <div>
-                <div class="uk-card uk-card-primary"></div>
+                <div class="uk-card uk-card-primary"><div class="uk-card-body"><p>Card Body</p></div></div>
             </div>
         </div>
     </div>
@@ -58,13 +58,13 @@ export const GridWitdh = (bm, c) => {
     category: 'Grid',
     content: `<div class="uk-text-center" uk-grid>
     <div class="uk-width-auto-at-m">
-        <div class="uk-card"><p>Auto</p></div>
+        <div class="uk-card"><div class="uk-card-body"><p>Auto</p></div></div>
     </div>
     <div class="uk-width-1-3-at-m">
-        <div class="uk-card"><p>1-3</p></div>
+        <div class="uk-card"><div class="uk-card-body"><p>1-3</p></div></div>
     </div>
     <div class="uk-width-expand-at-m">
-        <div class="uk-card"><p>Expand</p></div>
+        <div class="uk-card"><div class="uk-card-body"><p>Expand</p></div></div>
     </div>
 </div>`
   });
@@ -76,31 +76,31 @@ export const GridMasonry = (bm, c) => {
     category: 'Grid',
     content: `<div class="uk-child-width-1-2-at-s uk-child-width-1-3-at-m" uk-grid="masonry: true">
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 100px"></div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 100px"><div class="uk-card-body"><p>Card Body</p></div></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 130px"></div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 130px"><div class="uk-card-body"><p>Card Body</p></div></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 150px"></div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 150px"><div class="uk-card-body"><p>Card Body</p></div></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 160px"></div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 160px"><div class="uk-card-body"><p>Card Body</p></div></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 120px"></div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 120px"><div class="uk-card-body"><p>Card Body</p></div></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 140px"></div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 140px"><div class="uk-card-body"><p>Card Body</p></div></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 200px"></div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 200px"><div class="uk-card-body"><p>Card Body</p></div></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 180px"></div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 180px"><div class="uk-card-body"><p>Card Body</p></div></div>
     </div>
     <div>
-        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 140px"></div>
+        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" style="height: 140px"><div class="uk-card-body"><p>Card Body</p></div></div>
     </div>
 </div>`
   });

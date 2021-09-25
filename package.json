@@ -1,6 +1,6 @@
 {
   "name": "grapesjs-uikit",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "grapesjs-uikit",
   "main": "dist/grapesjs-uikit.min.js",
   "repository": {
