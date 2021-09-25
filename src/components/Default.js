@@ -32,6 +32,28 @@ export default (domc) => {
                         type: 'class_select',
                         options: [
                             { value: '', name: 'None' },
+                            { value: 'uk-blend-multiply', name: 'blend mode to multiply' },
+                            { value: 'uk-blend-screen', name: 'blend mode to screen' },
+                            { value: 'uk-blend-overlay', name: 'blend mode to overlay' },
+                            { value: 'uk-blend-darken', name: 'blend mode to darken' },
+                            { value: 'uk-blend-lighten', name: 'blend mode to lighten' },
+                            { value: 'uk-blend-color-dodge', name: 'blend mode to color dodge' },
+                            { value: 'uk-blend-color-burn', name: 'blend mode to color burn' },
+                            { value: 'uk-blend-hard-light	', name: 'blend mode to hard light' },
+                            { value: 'uk-blend-soft-light', name: 'blend mode to soft light' },
+                            { value: 'uk-blend-difference', name: 'blend mode to difference' },
+                            { value: 'uk-blend-exclusion', name: 'blend mode to exclusion' },
+                            { value: 'uk-blend-hue', name: 'blend mode to hue' },
+                            { value: 'uk-blend-saturation', name: 'blend mode to saturation' },
+                            { value: 'uk-blend-color', name: 'blend mode to color' },
+                            { value: 'uk-blend-luminosity', name: 'blend mode to luminosity' }
+                        ],
+                        label: 'Blend modes'
+                    },
+                    {
+                        type: 'class_select',
+                        options: [
+                            { value: '', name: 'None' },
                             { value: 'uk-border-rounded', name: 'rounded' },
                             { value: 'uk-border-circle', name: 'circle' },
                             { value: 'uk-border-pill', name: 'pill' },
@@ -148,15 +170,24 @@ export default (domc) => {
                     {
                         type: 'class_select',
                         options: [
-                            { value: '', name: 'Default' },
-                            { value: 'border', name: 'Full' },
-                            { value: 'border-top-0', name: 'No top' },
-                            { value: 'border-right-0', name: 'No right' },
-                            { value: 'border-bottom-0', name: 'No bottom' },
-                            { value: 'border-left-0', name: 'No left' },
-                            { value: 'border-0', name: 'None' }
+                            { value: '', name: 'None' },
+                            { value: 'uk-blend-multiply', name: 'blend mode to multiply' },
+                            { value: 'uk-blend-screen', name: 'blend mode to screen' },
+                            { value: 'uk-blend-overlay', name: 'blend mode to overlay' },
+                            { value: 'uk-blend-darken', name: 'blend mode to darken' },
+                            { value: 'uk-blend-lighten', name: 'blend mode to lighten' },
+                            { value: 'uk-blend-color-dodge', name: 'blend mode to color dodge' },
+                            { value: 'uk-blend-color-burn', name: 'blend mode to color burn' },
+                            { value: 'uk-blend-hard-light	', name: 'blend mode to hard light' },
+                            { value: 'uk-blend-soft-light', name: 'blend mode to soft light' },
+                            { value: 'uk-blend-difference', name: 'blend mode to difference' },
+                            { value: 'uk-blend-exclusion', name: 'blend mode to exclusion' },
+                            { value: 'uk-blend-hue', name: 'blend mode to hue' },
+                            { value: 'uk-blend-saturation', name: 'blend mode to saturation' },
+                            { value: 'uk-blend-color', name: 'blend mode to color' },
+                            { value: 'uk-blend-luminosity', name: 'blend mode to luminosity' }
                         ],
-                        label: 'Border width'
+                        label: 'Blend modes'
                     },
                     {
                         type: 'class_select',
@@ -209,14 +240,6 @@ export default (domc) => {
                             { value: 'uk-container-expand', name: 'Expand' }
                         ],
                         label: 'Container size'
-                    },
-                    {
-                        type: 'class_select',
-                        options: [
-                            { value: '', name: 'Default' },
-                            ...contexts_w_white.map(function (v) { return { value: 'border border-' + v, name: capitalize(v) } })
-                        ],
-                        label: 'Border color'
                     },
                     {
                         type: 'text',

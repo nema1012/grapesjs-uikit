@@ -1,6 +1,6 @@
 import Card, {CardBlock, CardBlockHorizonzal} from './components/Card';
 import Navigation, {TabBlock} from './components/Navigation'
-import ImageComponents, {Image, BackgroundImage, ImageSlider, UcCover, ResponsiveHeight, Lightbox, SliderLightbox} from './components/Image'
+import ImageComponents, {Image, BackgroundImage, ImageSlider, UcCover, ResponsiveHeight, Lightbox, SliderLightbox, ImageSliderWithParallax} from './components/Image'
 
 import Default from './components/Default';
 import AccordionElements, {Accordion} from './components/Accordion';
@@ -39,6 +39,7 @@ export default (editor, opts = {}) => {
   Image(bm, c);
   BackgroundImage(bm, c);
   ImageSlider(bm, c);
+  ImageSliderWithParallax(bm, c);
   Lightbox(bm, c);
   SliderLightbox(bm, c);
   UcCover(bm, c);

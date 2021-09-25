@@ -50,6 +50,43 @@ export const ImageSlider = (bm, c) => {
   });
 }
 
+export const ImageSliderWithParallax = (bm, c) => {
+  bm.add('imageSliderWithParallax', {
+    attributes: {
+      class: 'fa fa-image'
+    },
+    label: 'Image Slider With Parallax',
+    category: 'Media',
+    content: `<div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow=" animation: push">
+    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow-container>
+  <ul class="uk-slideshow-items" uk-height-viewport>
+      <li data-gjs-type="image-container">
+          <img data-gjs-type="uk-image" src="https://via.placeholder.com/1200x800/0000FF/808080" alt="" uk-cover>
+          <div class="uk-position-center uk-position-small uk-text-center">
+                <div uk-slideshow-parallax=" x: 100,-100 "><h2>Heading</h2></div>
+                <div uk-slideshow-parallax=" x: 200,-200 "><p>Lorem ipsum dolor sit amet.</p></div>
+            </div>
+      </li>
+      <li data-gjs-type="image-container">
+          <img data-gjs-type="uk-image" src="https://via.placeholder.com/1200x800/FF0000/FFFFFF" alt="" uk-cover>
+          <div class="uk-position-center uk-position-small uk-text-center">
+                <div uk-slideshow-parallax=" x: 100,-100 "><h2>Heading</h2></div>
+                <div uk-slideshow-parallax=" x: 200,-200 "><p>Lorem ipsum dolor sit amet.</p></div>
+            </div>
+      </li>
+      <li data-gjs-type="image-container">
+          <img data-gjs-type="uk-image" src="https://via.placeholder.com/1200x800/FFFF00/000000" alt="" uk-cover>
+          <div class="uk-position-center uk-position-small uk-text-center">
+                <div uk-slideshow-parallax=" y: -50,0,0; opacity: 1,1,0 "><h2>Heading</h2></div>
+                <div uk-slideshow-parallax=" y: -50,0,0; opacity: 1,1,0 "><p>Lorem ipsum dolor sit amet.</p></div>
+            </div>
+      </li>
+  </ul>
+  </div>
+</div>`
+  });
+}
+
 export const UcCover = (bm, c) => {
   bm.add('uccover', {
     attributes: {
@@ -165,7 +202,17 @@ export default (domc, editor) => {
             type: 'text',
             label: 'Source (URL)',
             name: 'src'
-          }
+          },
+          {
+            type: 'number',
+            label: 'width',
+            name: 'width'
+          },
+          {
+          type: 'number',
+          label: 'height',
+          name: 'height'
+        }
         ].concat(imageModel.prototype.defaults.traits)
       }),
     }, {
@@ -624,6 +671,123 @@ export default (domc, editor) => {
       }
     }),
     view: linkView
+  });
+
+  domc.addType('uk-slideshow-parallax', {
+    model: defaultModel.extend({
+      defaults: Object.assign({}, defaultModel.prototype.defaults, {
+        name: 'SlideShow Parallax',
+        traits: [
+          {
+            type: 'text',
+            label: 'target',
+            name: 'target',
+            changeProp: 1
+          },
+          {
+            label: 'opacity',
+            name: 'opacity',
+            changeProp: 1,
+            type: 'text',
+          },
+          {
+            type: 'text',
+            label: 'Animate translateX',
+            name: 'x',
+            changeProp: 1
+          },
+          {
+            type: 'text',
+            label: 'Animate translatey',
+            name: 'y',
+            changeProp: 1
+          },
+          {
+            type: 'text',
+            label: 'Animate background X position.',
+            name: 'bgx',
+            changeProp: 1
+          },
+          {
+            type: 'text',
+            label: 'Animate background Y position.',
+            name: 'bgy',
+            changeProp: 1
+          },
+          {
+            type: 'text',
+            label: 'Scale',
+            name: 'scale',
+            changeProp: 1
+          },
+          {
+            type: 'number',
+            label: 'Viewport',
+            name: 'viewport',
+            changeProp: 1,
+            placeholder: '0-1',
+            min: 0, // Minimum number value
+            max: 1, // Maximum number value
+            step: 0.1,
+          },
+        ].concat(defaultModel.prototype.defaults.traits)
+      }),
+      init2() {
+        const attributes = this.getAttributes()['uk-slideshow-parallax']
+        if (attributes) {
+          const attrs = attributes.split(';');
+
+          for (let idx in attrs) {
+            const attribute = attrs[idx].split(':');
+            if (attribute.length > 1) {
+              this.set(attribute[0].replace(/\s/g, ''), attribute[1].replace(/\s/g, ''));
+            }
+          }
+        };
+        
+        this.listenTo(this, 'change:opacity', this.opacity);
+        this.listenTo(this, 'change:x', this.x);
+        this.listenTo(this, 'change:y', this.y);
+        this.listenTo(this, 'change:bgx', this.bgx);
+        this.listenTo(this, 'change:bgy', this.bgy);
+        this.listenTo(this, 'change:scale', this.scale);
+        this.listenTo(this, 'change:viewport', this.viewport);
+      },
+      opacity() { this.updateParallax('opacity') },
+      x() { this.updateParallax('x') },
+      y() { this.updateParallax('y') },
+      scale() { this.updateParallax('scale') },
+      viewport() { this.updateParallax('viewport') },
+      updateParallax(attribut) {
+        const state = this.get(attribut);
+
+        let parallax = this.getAttributes()['uk-slideshow-parallax'];
+
+        if (!parallax) {
+          parallax = '';
+        }
+        if (parallax.includes(` ${attribut}: `)) {
+          if (!state) {
+            parallax = parallax.replace(new RegExp(` ${attribut}: ([^;]+);`), ``);
+          }  else {
+            parallax = parallax.replace(new RegExp(` ${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
+          }        } else if (state) {
+          parallax += ` ${attribut}: ${state};`;
+        }
+        let attrs = [];
+        attrs['uk-slideshow-parallax'] = parallax
+        this.addAttributes(attrs);
+        UIkit.update(document.body, 'update');
+      }
+    }, {
+      isComponent(el) {
+        if (el.hasAttribute && el.hasAttribute('uk-slideshow-parallax') && el.tagName === 'DIV') {
+          return { type: 'uk-slideshow-parallax' };
+        }
+      },
+    }),
+
+    view: defaultView,
   });
 
 }

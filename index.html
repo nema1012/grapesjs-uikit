@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>grapesjs-uikit</title>
+    <link href="https://unpkg.com/grapesjs/dist/css/grapes.min.css" rel="stylesheet">
+    <script src="node_modules/grapesjs/dist/grapes.min.js"></script>
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="gjs" style="height:0px; overflow:hidden">
+      <div style="margin:100px 100px 25px; padding:25px; font:caption">
+        This is a demo content from _index.html. You can use this template file for
+        development purpose. It won't be stored in your git repository
+      </div>
+    </div>
+
+
+    <script type="text/javascript">
+      window.editor = grapesjs.init({
+        height: '100%',
+        container: '#gjs',
+        showOffsets: true,
+        fromElement: true,
+        noticeOnUnload: false,
+        storageManager: false,
+        plugins: ['grapesjs-uikit'],
+        pluginsOpts: {
+          'grapesjs-uikit': { /* Test here your options  */ }
+        },
+        canvas: {
+            styles: [
+                'node_modules/uikit/dist/css/uikit.min.css'
+            ],
+            scripts: [
+                'node_modules/uikit/dist/js/uikit.min.js',
+                'node_modules/uikit/dist/js/uikit-icons.min.js'
+            ],
+        }
+      });
+    </script>
+  </body>
+</html>
