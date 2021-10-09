@@ -50,6 +50,115 @@ export const ImageSlider = (bm, c) => {
   });
 }
 
+export const SlideShow = (bm, c) => {
+  bm.add('slideShow', {
+    attributes: {
+      class: 'fa fa-image'
+    },
+    label: 'Slide Show',
+    category: 'Media',
+    content: `<div class="uk-container" uk-slider="center: true">
+      <div class="uk-position-relative uk-visible-toggle uk-light uk-child-width-1-1 uk-slider-items" uk-slideshow-container>
+          <div>
+              <img src="https://via.placeholder.com/1200x800/FF0000/FFFFFF" alt="">
+              <div class="uk-position-center uk-panel">
+                <h1>1</h1>
+              </div>
+          </div>
+          <div>
+              <img src="https://via.placeholder.com/1200x800/FFFF00/FFFFFF" alt="">
+              <div class="uk-position-center uk-panel">
+                <h1>2</h1>
+              </div>
+          </div>
+          <div>
+              <img src="https://via.placeholder.com/1200x800/FF00FF/FFFFFFg" alt="">
+              <div class="uk-position-center uk-panel">
+                <h1>3</h1>
+              </div>
+          </div>
+          <div>
+              <img src="https://via.placeholder.com/1200x800/00FF00/FFFFFF" alt="">
+              <div class="uk-position-center uk-panel">
+                <h1>4</h1>
+              </div>
+          </div>
+          <div>
+              <img src="https://via.placeholder.com/1200x800/00FFFF/FFFFFF" alt="">
+              <div class="uk-position-center uk-panel">
+                <h1>5</h1>
+              </div>
+          </div>
+          </div>
+          <div uk-slideshow-items-navigation>
+            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+          </div>
+    </div>`
+  });
+}
+
+export const SlideShowWithLightBox = (bm, c) => {
+  bm.add('slideShowWithLightbox', {
+    attributes: {
+      class: 'fa fa-image'
+    },
+    label: 'Slide Show With Lightbox',
+    category: 'Media',
+    content: `<div class="uk-container" uk-slider=" center: true">
+      <div class="uk-position-relative uk-visible-toggle uk-light uk-child-width-1-1" uk-slideshow-container>
+        <div class="uk-slider-items uk-grid" uk-lightbox>
+          <div>
+            <a href="https://via.placeholder.com/1200x800/FF0000/FFFFFF.jpg" uk-lightbox-image class="uk-inline">
+              <img src="https://via.placeholder.com/1200x800/FF0000/FFFFFF.jpg" alt="">
+              <div class="uk-position-center uk-panel">
+                <h1>1</h1>
+              </div>
+            </a>
+          </div>
+          <div>
+            <a href="https://via.placeholder.com/1200x800/FFFF00/FFFFFF.jpg" uk-lightbox-image class="uk-inline">
+              <img src="https://via.placeholder.com/1200x800/FFFF00/FFFFFF.jpg" alt="">
+              <div class="uk-position-center uk-panel">
+                <h1>2</h1>
+              </div>
+            </a>
+          </div>
+          <div>
+            <a href="https://via.placeholder.com/1200x800/FF00FF/FFFFFF.jpg" uk-lightbox-image class="uk-inline">
+              <img src="https://via.placeholder.com/1200x800/FF00FF/FFFFFF.jpg" alt="">
+              <div class="uk-position-center uk-panel">
+                <h1>3</h1>
+              </div>
+            </a>
+          </div>
+          <div>
+            <a href="https://via.placeholder.com/1200x800/00FF00/FFFFFF.jpg" uk-lightbox-image class="uk-inline">
+              <img src="https://via.placeholder.com/1200x800/00FF00/FFFFFF.jpg" alt="">
+              <div class="uk-position-center uk-panel">
+                <h1>4</h1>
+              </div>
+            </a>
+          </div>
+          <div>
+            <a href="https://via.placeholder.com/1200x800/00FFFF/FFFFFF.jpg" uk-lightbox-image class="uk-inline">
+              <img src="https://via.placeholder.com/1200x800/00FFFF/FFFFFF.jpg" alt="">
+              <div class="uk-position-center uk-panel">
+                <h1>5</h1>
+              </div>
+            </a>
+          </div>
+        </div>
+    
+      <div uk-slideshow-items-navigation>
+      <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+      <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+      </div>
+    </div>
+    </div>`
+  });
+}
+
 export const ImageSliderWithParallax = (bm, c) => {
   bm.add('imageSliderWithParallax', {
     attributes: {
@@ -171,8 +280,10 @@ export const SliderLightbox = (bm, c) => {
           </li>
         </ul>
       </div>
+      <div uk-slideshow-items-navigation>
           <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
-        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+          <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+      </div>
     </div>
     </div>
     </div>`
@@ -390,6 +501,17 @@ export default (domc, editor) => {
         ].concat(defaultModel.prototype.defaults.traits)
       }),
       init2() {
+        let container = this.components().filter(function (comp) {
+          return comp.attributes.attributes['uk-slideshow-container'] === '';
+        })[0];
+
+        let existing = container.components().filter(function (comp) {
+          return comp.attributes.attributes['uk-slideshow-items-navigation'] === '';
+        });
+
+        if (existing) {
+          this.set('navigation', true);
+        }
         const child = this.components();
         this.listenTo(child, 'add', this.refresh);
         this.listenTo(child, 'remove', this.refresh);
@@ -443,7 +565,7 @@ export default (domc, editor) => {
         })[0];
 
         let existing = container.components().filter(function (comp) {
-          return comp.attributes.content.includes('uk-slideshow-items-navigation');
+          return comp.attributes.attributes['uk-slideshow-items-navigation'] === '';
         });
 
         if (state && (!existing || existing.length === 0)) {
@@ -488,6 +610,181 @@ export default (domc, editor) => {
     view: defaultView
   });
 
+  domc.addType('uk-slider', {
+    model: defaultModel.extend({
+      defaults: Object.assign({}, defaultModel.prototype.defaults, {
+        traits: [
+          {
+            type: 'checkbox',
+            label: 'Autoplay',
+            name: 'autoplay',
+            changeProp: 1
+          },
+          {
+            type: 'checkbox',
+            label: 'center',
+            name: 'center',
+            changeProp: 1
+          },
+          {
+            type: 'checkbox',
+            label: 'draggable',
+            name: 'draggable',
+            changeProp: 1
+          },
+          {
+            type: 'checkbox',
+            label: 'finite',
+            name: 'finite',
+            changeProp: 1
+          },
+          {
+            type: 'checkbox',
+            label: 'pause-on-hover',
+            name: 'pause-on-hover',
+            changeProp: 1
+          },
+          {
+            type: 'checkbox',
+            label: 'sets',
+            name: 'sets',
+            changeProp: 1
+          },
+          {
+            type: 'checkbox',
+            label: 'Dotnav',
+            name: 'dotnav',
+            changeProp: 1
+          },
+          {
+            type: 'checkbox',
+            label: 'Navigation',
+            name: 'navigation',
+            changeProp: 1
+          }
+        ].concat(defaultModel.prototype.defaults.traits)
+      }),
+      init2() {
+        let container = this.components().filter(function (comp) {
+          return comp.attributes.attributes['uk-slideshow-container'] === '';
+        })[0];
+
+        let existing = container.components().filter(function (comp) {
+          return comp.attributes.attributes["uk-slideshow-items-navigation"] === '';
+        });
+
+        if (existing) {
+          this.set('navigation', true);
+        }
+        const child = this.components();
+        this.listenTo(child, 'add', this.refresh);
+        this.listenTo(child, 'remove', this.refresh);
+        this.listenTo(this, 'change:center', this.updateCenter);
+        this.listenTo(this, 'change:autoplay', this.updateAutoplay);
+        this.listenTo(this, 'change:dotnav', this.updateDotnav);
+        this.listenTo(this, 'change:draggable', this.updateDraggable);
+        this.listenTo(this, 'change:finite', this.updateFinite);
+        this.listenTo(this, 'change:pause-on-hover', this.updateHover);
+        this.listenTo(this, 'change:sets', this.updateSets);
+        this.listenTo(this, 'change:navigation', this.updateNavigation);
+
+        const attributes = this.getAttributes()['uk-slideshow']
+        if (attributes) {
+          const attrs = attributes.split(';');
+
+          for (let idx in attrs) {
+            const attribute = attrs[idx].split(':');
+            if (attribute.length > 1) {
+              this.set(attribute[0].replace(/\s/g, ''), attribute[1].replace(/\s/g, ''));
+            }
+          }
+        };
+      },
+      updateCenter() { this.updateSlideShow('center') },
+      updateAutoplay() { this.updateSlideShow('autoplay') },
+      updateDotnav() { this.updateSlideShow('dotnav') },
+      updateDraggable() { this.updateSlideShow('draggable') },
+      updateFinite() { this.updateSlideShow('finite') },
+      updateHover() { this.updateSlideShow('pause-on-hover') },
+      updateSets() { this.updateSlideShow('sets') },
+
+      updateSlideShow(attribut) {
+        const state = this.get(attribut);
+        let slideShow = this.getAttributes()['uk-slider'];
+
+        if (!slideShow) {
+          slideShow = '';
+        }
+        if (state === '' && item.includes(` ${attribut}: `)) {
+          item = item.replace(new RegExp(` ${attribut}: ([^;]+);`), '');
+        } else if (slideShow.includes(attribut)) {
+          slideShow = slideShow.replace(new RegExp(` ${attribut}: ([^;]+);`), ` ${attribut}: ${state};`);
+        } else if (state) {
+          slideShow += ` ${attribut}: ${state};`;
+        }
+
+        let attrs = [];
+        attrs['uk-slider'] = slideShow
+        this.addAttributes(attrs);
+
+        this.refresh();
+      },
+      updateNavigation() {
+        const navigation = `<div uk-slideshow-items-navigation>
+        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+          <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a></div>`
+
+        const state = this.get('navigation');
+        let container = this.components().filter(function (comp) {
+          return comp.attributes.attributes['uk-slideshow-container'] === '';
+        })[0];
+
+        let existing = container.components().filter(function (comp) {
+          return comp.attributes.attributes["uk-slideshow-items-navigation"] === '';
+        });
+
+        if (state && (!existing || existing.length === 0)) {
+          var comp = container.components().add({
+            content: navigation
+          });
+        } else if (!state && existing) {
+          for (let ex of existing) {
+            ex.destroy();
+          }
+        }
+
+        this.refresh();
+      },
+      updateDotnav() {
+        const state = this.get('dotnav');
+        let children = this.components();
+        let existing = children.filter(function (comp) {
+          return comp.attributes.content.includes('uk-dotnav');
+        })[0]; // should only be one of each.
+
+        if (state && !existing) {
+          var comp = children.add({
+            content: '<ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin" uk-dotnav></ul>'
+          });
+        } else if (!state && existing) {
+          existing.destroy();
+        }
+
+        this.refresh();
+      },
+      refresh() {
+        UIkit.update(document.body, 'update');
+      }
+    }, {
+      isComponent: function (el) {
+        if (el && el.hasAttribute && el.hasAttribute('uk-slider')) {
+          return { type: 'uk-slider' };
+        }
+      }
+    }),
+    view: defaultView
+  });
+
   domc.addType('slideshow-container', {
     model: defaultModel.extend({
       defaults: {
@@ -500,6 +797,25 @@ export default (domc, editor) => {
       isComponent(el) {
         if (el.hasAttribute && el.hasAttribute('uk-slideshow-container')) {
           return { type: 'slideshow-container' };
+        }
+      },
+    }),
+
+    view: defaultView,
+  });
+
+  domc.addType('slideshow-navigation', {
+    model: defaultModel.extend({
+      defaults: {
+        ...defaultModel.prototype.defaults,
+        draggable: false,
+        copyable: false,
+        removable: true,
+      },
+    }, {
+      isComponent(el) {
+        if (el.hasAttribute && el.hasAttribute('uk-slideshow-items-navigation')) {
+          return { type: 'slideshow-navigation' };
         }
       },
     }),
@@ -577,7 +893,7 @@ export default (domc, editor) => {
             label: 'pause-on-hover',
             name: 'pause-on-hover',
             changeProp: 1
-          },
+          }
         ].concat(defaultModel.prototype.defaults.traits)
       }),
       init2() {
@@ -652,14 +968,14 @@ export default (domc, editor) => {
         ].concat(linkModel.prototype.defaults.traits)
       }),
       init() {
-        this.listenTo(this, 'change:data-caption', this.dataCaption);
+        this.listenTo(this, 'change:data-caption', this.updateDataCaption);
         UIkit.update(document.body, 'update');
       },
       updateDataCaption() {this.update('data-caption')},
       update(attribut) {
         const state = this.get(attribut);
         let attrs = [];
-        attrs['data-caption'] = state
+        attrs[attribut] = state
         this.addAttributes(attrs);
         UIkit.update(document.body, 'update');
       }
