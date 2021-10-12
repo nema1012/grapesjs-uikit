@@ -312,7 +312,7 @@ export default (domc, editor) => {
           {
             type: 'text',
             label: 'Source (URL)',
-            name: 'src'
+            name: 'src',  
           },
           {
             type: 'number',
@@ -326,14 +326,27 @@ export default (domc, editor) => {
         }
         ].concat(imageModel.prototype.defaults.traits)
       }),
+      init2() {
+        if (!this.getAttributes()['uk-img']) {
+          this.addAttributes({'uk-img': ''});
+        }
+      },
     }, {
       isComponent: function (el) {
         if (el && el.tagName === 'IMG') {
           return { type: 'uk-image' };
         }
-      }
+      },
     }),
-    view: imageView
+    view:  Object.assign({}, imageView, {
+      onRender({ el }) {
+        let src = el.getAttribute('src');
+        if (src) {
+          el.setAttribute('data-src', src);
+          el.removeAttribute('src');
+        }
+      },
+    })
   });
 
   domc.addType('image-container', {

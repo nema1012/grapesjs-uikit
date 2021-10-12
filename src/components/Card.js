@@ -6,9 +6,7 @@ export const CardBlock = (bm, c) => {
             <div>${c.labels.card}</div>
         `,
     category: 'Components',
-    content: {
-      type: 'card'
-    }
+    content: '<div class="uk-card uk-card-default"><div class="uk-card-body"><p>Card Body</p></div></div>'
   });
 };
 
@@ -19,10 +17,7 @@ export const CardBlockHorizonzal = (bm, c) => {
             <div>${c.labels.card_horizontal}</div>
         `,
     category: 'Components',
-    content: {
-      type: 'card',
-      classes: ['uk-grid']
-    }
+    content: '<div class="uk-card uk-grid uk-card-default"><div class="uk-card-body"><p>Card Body</p></div></div>'
   });
 };
 
