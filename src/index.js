@@ -36,7 +36,6 @@ export default grapesjs.plugins.add('grapesjs-uikit', (editor, opts = {}) => {
     some.addAttributes({'uk-img': ''})
     some.addAttributes({'data-src': url})
     some.removeStyle('background-image');
-    console.info(some, argument);
  });
 
   const default_blocks = {
