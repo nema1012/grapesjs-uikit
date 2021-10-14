@@ -148,7 +148,7 @@ export default (domc, editor) => {
           let comp_children = comp.components();
           if (prop.indexOf('card-img') != -1) {
             comp_children.add({
-              type: 'card_image',
+              type: 'image',
             });
           }
           if (prop === 'card-header') {
@@ -184,23 +184,6 @@ export default (domc, editor) => {
       }
     }),
     view: defaultView
-  });
-  
-
-  domc.addType('card_image', {
-    model: imageModel.extend({
-      defaults: Object.assign({}, imageModel.prototype.defaults, {
-        'name': 'Card Image',
-        classes: [],
-      }),
-    }, {
-      isComponent(el) {
-        if (el && el.classList && el.classList.contains('card_image')) {
-          return { type: 'card_image' };
-        }
-      }
-    }),
-    view: imageView
   });
 
   domc.addType('card_image_top', {
