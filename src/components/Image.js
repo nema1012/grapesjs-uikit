@@ -8,7 +8,7 @@ export const Image = (bm, c) => {
     },
     label: 'Image',
     category: 'Media',
-    content: `<div data-gjs-type="image-container" class="uk-inline"><img data-gjs-type="uk-image" src="https://via.placeholder.com/1200x800/0000FF/808080" uk-img></div>`
+    content: `<div data-gjs-type="image-container" class="uk-inline"><img src="https://via.placeholder.com/1200x800/0000FF/808080" uk-img></div>`
   });
 };
 
@@ -36,13 +36,13 @@ export const ImageSlider = (bm, c) => {
     <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow-container>
   <ul class="uk-slideshow-items uk-height-viewport" uk-height-viewport=" offset-top: true; offset-bottom: 30">
       <li data-gjs-type="image-container">
-          <img data-gjs-type="uk-image" src="https://via.placeholder.com/1200x800/0000FF/808080" width="1800" height="1200" alt="" uk-cover>
+          <img src="https://via.placeholder.com/1200x800/0000FF/808080" width="1800" height="1200" alt="" uk-cover>
       </li>
       <li data-gjs-type="image-container">
-          <img data-gjs-type="uk-image" src="https://via.placeholder.com/1200x800/FF0000/FFFFFF" width="1800" height="1200" alt="" uk-cover>
+          <img src="https://via.placeholder.com/1200x800/FF0000/FFFFFF" width="1800" height="1200" alt="" uk-cover>
       </li>
       <li data-gjs-type="image-container">
-          <img data-gjs-type="uk-image" src="https://via.placeholder.com/1200x800/FFFF00/000000" width="1800" height="1200" alt="" uk-cover>
+          <img src="https://via.placeholder.com/1200x800/FFFF00/000000" width="1800" height="1200" alt="" uk-cover>
       </li>
   </ul>
   </div>
@@ -170,21 +170,21 @@ export const ImageSliderWithParallax = (bm, c) => {
     <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow-container>
   <ul class="uk-slideshow-items" uk-height-viewport>
       <li data-gjs-type="image-container">
-          <img data-gjs-type="uk-image" src="https://via.placeholder.com/1200x800/0000FF/808080" alt="" uk-cover>
+          <img src="https://via.placeholder.com/1200x800/0000FF/808080" alt="" uk-cover>
           <div class="uk-position-center uk-position-small uk-text-center">
                 <div uk-slideshow-parallax=" x: 100,-100 "><h2>Heading</h2></div>
                 <div uk-slideshow-parallax=" x: 200,-200 "><p>Lorem ipsum dolor sit amet.</p></div>
             </div>
       </li>
       <li data-gjs-type="image-container">
-          <img data-gjs-type="uk-image" src="https://via.placeholder.com/1200x800/FF0000/FFFFFF" alt="" uk-cover>
+          <img src="https://via.placeholder.com/1200x800/FF0000/FFFFFF" alt="" uk-cover>
           <div class="uk-position-center uk-position-small uk-text-center">
                 <div uk-slideshow-parallax=" x: 100,-100 "><h2>Heading</h2></div>
                 <div uk-slideshow-parallax=" x: 200,-200 "><p>Lorem ipsum dolor sit amet.</p></div>
             </div>
       </li>
       <li data-gjs-type="image-container">
-          <img data-gjs-type="uk-image" src="https://via.placeholder.com/1200x800/FFFF00/000000" alt="" uk-cover>
+          <img src="https://via.placeholder.com/1200x800/FFFF00/000000" alt="" uk-cover>
           <div class="uk-position-center uk-position-small uk-text-center">
                 <div uk-slideshow-parallax=" y: -50,0,0; opacity: 1,1,0 "><h2>Heading</h2></div>
                 <div uk-slideshow-parallax=" y: -50,0,0; opacity: 1,1,0 "><p>Lorem ipsum dolor sit amet.</p></div>
@@ -295,59 +295,9 @@ export default (domc, editor) => {
   const defaultType = comps.getType('default');
   const defaultModel = defaultType.model;
   const defaultView = defaultType.view;
-  const imageType = domc.getType('image');
-  const imageModel = imageType.model;
-  const imageView = imageType.view;
   const linkType = domc.getType('link');
   const linkModel = linkType.model;
   const linkView = linkType.view;
-
-  domc.addType('uk-image', {
-    model: imageModel.extend({
-      defaults: Object.assign({}, imageModel.prototype.defaults, {
-        'name': 'Image',
-        tagName: 'img',
-        fallback: null,
-        traits: [
-          {
-            type: 'text',
-            label: 'Source (URL)',
-            name: 'src',  
-          },
-          {
-            type: 'number',
-            label: 'width',
-            name: 'width'
-          },
-          {
-          type: 'number',
-          label: 'height',
-          name: 'height'
-        }
-        ].concat(imageModel.prototype.defaults.traits)
-      }),
-      init2() {
-        if (!this.getAttributes()['uk-img']) {
-          this.addAttributes({'uk-img': ''});
-        }
-      },
-    }, {
-      isComponent: function (el) {
-        if (el && el.tagName === 'IMG') {
-          return { type: 'uk-image' };
-        }
-      },
-    }),
-    view:  Object.assign({}, imageView, {
-      onRender({ el }) {
-        let src = el.getAttribute('src');
-        if (src) {
-          el.setAttribute('data-src', src);
-          el.removeAttribute('src');
-        }
-      },
-    })
-  });
 
   domc.addType('image-container', {
     model: defaultModel.extend({

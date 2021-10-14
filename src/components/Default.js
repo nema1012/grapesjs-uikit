@@ -16,6 +16,21 @@ export default (domc) => {
             defaults: Object.assign({}, imageModel.prototype.defaults, {
                 traits: [
                     {
+                        type: 'text',
+                        label: 'Source (URL)',
+                        name: 'src',  
+                      },
+                      {
+                        type: 'number',
+                        label: 'width',
+                        name: 'width'
+                      },
+                      {
+                      type: 'number',
+                      label: 'height',
+                      name: 'height'
+                    },
+                    {
                         type: 'class_select',
                         options: [
                             { value: '', name: 'Default' },
@@ -118,6 +133,9 @@ export default (domc) => {
             }),
             init() {
                 const classes = this.get('classes');
+                this.addAttributes({'uk-img': ''});
+                this.addAttributes({'loading': 'lazy'});
+
                 classes.bind('add', this.classesChanged.bind(this));
                 classes.bind('change', this.classesChanged.bind(this));
                 classes.bind('remove', this.classesChanged.bind(this));
@@ -142,7 +160,15 @@ export default (domc) => {
                 this.destroy();
             }
         }),
-        view: imageView
+        view: Object.assign({}, imageView, {
+            onRender({ el }) {
+              let src = el.getAttribute('src');
+              if (src) {
+                el.setAttribute('data-src', src);
+                el.removeAttribute('src');
+              }
+            },
+          })
     });
 
 

@@ -192,10 +192,10 @@ export default (domc, editor) => {
       defaults: Object.assign({}, imageModel.prototype.defaults, {
         'name': 'Card Image',
         classes: [],
-      })
+      }),
     }, {
       isComponent(el) {
-        if (el && el.classList && el.classList.contains('cartd_image')) {
+        if (el && el.classList && el.classList.contains('card_image')) {
           return { type: 'card_image' };
         }
       }
