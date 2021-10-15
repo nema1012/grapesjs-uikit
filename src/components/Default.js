@@ -125,9 +125,21 @@ export default (domc) => {
                     },
                     {
                         type: 'text',
-                        label: 'Title',
-                        name: 'title',
-                        placeholder: 'My Element'
+                        label: 'ID',
+                        name: 'id',
+                        placeholder: 'my_element'
+                    },
+                    {
+                        type: 'text',
+                        label: 'data-srcset',
+                        name: 'data-srcset',
+                        placeholder: 'https://images.unsplash.com/photo-1490822180406-880c226c150b?fit=crop&w=650&h=433&q=80 650w, https://images.unsplash.com/photo-1490822180406-880c226c150b?fit=crop&w=1300&h=866&q=80 1300w'
+                    },
+                    {
+                        type: 'text',
+                        label: 'data-sizes',
+                        name: 'data-sizes',
+                        placeholder: '(min-width: 650px) 650px, 100vw'
                     }
                 ].concat(imageModel.prototype.defaults.traits)
             }),
@@ -278,6 +290,18 @@ export default (domc) => {
                         label: 'Title',
                         name: 'title',
                         placeholder: 'My Element'
+                    },
+                    {
+                        type: 'text',
+                        label: 'data-srcset',
+                        name: 'data-srcset',
+                        placeholder: 'https://images.unsplash.com/photo-1490822180406-880c226c150b?fit=crop&w=650&h=433&q=80 650w, https://images.unsplash.com/photo-1490822180406-880c226c150b?fit=crop&w=1300&h=866&q=80 1300w'
+                    },
+                    {
+                        type: 'text',
+                        label: 'data-sizes',
+                        name: 'data-sizes',
+                        placeholder: '(min-width: 650px) 650px, 100vw'
                     }
                 ].concat(defaultModel.prototype.defaults.traits)
             }),
