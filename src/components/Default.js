@@ -1,5 +1,11 @@
 import contexts from '../uikit-contexts';
 import { capitalize } from "../utils";
+import {
+    isUndefined,
+    isFunction,
+    isBoolean,
+    isString
+} from 'underscore';
 
 export default (domc) => {
     const contexts_w_white = contexts.concat(['white']);
@@ -18,17 +24,17 @@ export default (domc) => {
                     {
                         type: 'text',
                         label: 'Source (URL)',
-                        name: 'src',  
-                      },
-                      {
+                        name: 'src',
+                    },
+                    {
                         type: 'number',
                         label: 'width',
                         name: 'width'
-                      },
-                      {
-                      type: 'number',
-                      label: 'height',
-                      name: 'height'
+                    },
+                    {
+                        type: 'number',
+                        label: 'height',
+                        name: 'height'
                     },
                     {
                         type: 'class_select',
@@ -143,10 +149,54 @@ export default (domc) => {
                     }
                 ].concat(imageModel.prototype.defaults.traits)
             }),
+            toHTML(opts = {}) {
+                const model = this;
+                const attrs = [];
+                const customTag = opts.tag;
+                const tag = customTag || model.get('tagName');
+                const sTag = model.get('void');
+                const customAttr = opts.attributes;
+                let attributes = this.getAttrToHTML();
+                delete opts.tag;
+
+                // Get custom attributes if requested
+                if (customAttr) {
+                    if (isFunction(customAttr)) {
+                        attributes = customAttr(model, attributes) || {};
+                    } else if (isObject(customAttr)) {
+                        attributes = customAttr;
+                    }
+                }
+
+                for (let attr in attributes) {
+                    const val = attributes[attr];
+                    const value = isString(val) ? val.replace(/"/g, '&quot;') : val;
+                    if (attr === 'src') {
+                        if (attributes['data-src'] !== '') {
+                            attrs.push(`data-src="${value}"`);
+                        }
+                    } else if (!isUndefined(value)) {
+                        if (isBoolean(value)) {
+                            value && attrs.push(attr);
+                        } else {
+                            attrs.push(`${attr}="${value}"`);
+                        }
+                    }
+                }
+
+                const comps = model.get('components');
+                const content = !comps.length ? model.get('content') : '';
+                const attrString = attrs.length ? ` ${attrs.join(' ')}` : '';
+                let code = `<${tag}${attrString}${sTag ? '/' : ''}>${content}`;
+                comps.forEach(comp => (code += comp.toHTML(opts)));
+                !sTag && (code += `</${tag}>`);
+
+                return code;
+            },
             init() {
                 const classes = this.get('classes');
-                this.addAttributes({'uk-img': ''});
-                this.addAttributes({'loading': 'lazy'});
+                this.addAttributes({ 'uk-img': '' });
+                this.addAttributes({ 'loading': 'lazy' });
 
                 classes.bind('add', this.classesChanged.bind(this));
                 classes.bind('change', this.classesChanged.bind(this));
@@ -174,13 +224,16 @@ export default (domc) => {
         }),
         view: Object.assign({}, imageView, {
             onRender({ el }) {
-              let src = el.getAttribute('src');
-              if (src) {
-                el.setAttribute('data-src', src);
-                el.removeAttribute('src');
-              }
+                let src = el.getAttribute('src');
+                let dataSrc = el.getAttribute('data-src');
+                if (src && !dataSrc) {
+                    el.setAttribute('data-src', src);
+                }
+                if (src) {
+                    el.removeAttribute('src');
+                }
             },
-          })
+        })
     });
 
 
