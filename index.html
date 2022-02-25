@@ -30,7 +30,11 @@
         showOffsets: true,
         fromElement: true,
         noticeOnUnload: false,
-        storageManager: false,
+        storageManager: {
+        autoload: false,
+        autosave: false,
+        type: 'firebase-storage'
+      },
         plugins: ['grapesjs-uikit'],
         pluginsOpts: {
           'grapesjs-uikit': { /* Test here your options  */ }
@@ -45,6 +49,38 @@
             ],
         }
       });
+
+      window.editor.Panels.addButton('options', [{
+      id: 'save-db',
+      className: 'fa fa-save save',
+      command: 'save-db',
+      attributes: { title: 'Speichern' }
+    }]);
+
+    const SimpleStorage = {};
+    window.editor.StorageManager.add('firebase-storage', {
+      /**
+       * Store the data
+       * @param  {Object} data Data object to store
+       * @param  {Function} clb Callback function to call when the load is ended
+       * @param  {Function} clbErr Callback function to call in case of errors
+       */
+      store(data, clb, clbErr) {
+        for (let key in data) {
+          SimpleStorage[key] = data[key];
+        }
+        // Might be called inside some async method
+       console.info(SimpleStorage);
+      }
+    });
+
+    window.editor.Commands.add('save-db', {
+      run: function (editor, sender) {
+        sender && sender.set('active', 0); // turn off the button
+        editor.store();
+      }
+    });
+
     </script>
   </body>
 </html>

@@ -32,7 +32,7 @@ export default grapesjs.plugins.add('grapesjs-uikit', (editor, opts = {}) => {
   editor.on('component:styleUpdate:background-image', (some, argument) => {
     let url = argument.replace('url(', '');
     url = url.replace(')', '');
-    url = url.replace(/'/, '')
+    url = url.replace(/'/g, '')
     some.addAttributes({'uk-img': ''})
     some.addAttributes({'data-src': url})
     some.removeStyle('background-image');
