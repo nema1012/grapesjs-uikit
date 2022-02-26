@@ -30,9 +30,8 @@ export default grapesjs.plugins.add('grapesjs-uikit', (editor, opts = {}) => {
   delete opts['blockCategories'];
 
   editor.on('component:styleUpdate:background-image', (some, argument) => {
-    let url = argument.replace('url(', '');
-    url = url.replace(')', '');
-    url = url.replace(/'/g, '')
+    let url = argument.replace(/url\('/, '');
+    url = url.replace(/'\)/, '');
     some.addAttributes({'uk-img': ''})
     some.addAttributes({'data-src': url})
     some.removeStyle('background-image');
